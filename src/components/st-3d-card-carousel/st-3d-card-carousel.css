@@ -1,0 +1,130 @@
+h2 {
+    margin-top: 5px;
+    color: white;
+    font-size: 25px;
+}
+
+i {
+    color: #3E2723;
+}
+
+@keyframes resize {
+    0% {
+    transform: scale(1.0);
+    }
+    50% {
+    transform: scale(1.2);
+    }
+    100% {
+    transform: scale(1.0);
+    }
+}
+
+.carousel-container {
+    padding: 70px 0;
+    margin: 50px auto;
+    width: 200px;
+    height: 550px;
+    position: relative;
+    perspective: 1000px;
+    touch-action: pan-y;
+}
+.carousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+.carousel img {
+    width:200px;
+    height:200px;
+    margin-top: 10px;
+}
+
+.carousel-slide-item {
+    display: block;
+    position: absolute;
+    background:#000;
+    width: 200px;
+    height: auto;
+    font-size: large;
+    text-align: center;
+    color: #FFF;
+    opacity: 0.95;
+    border-radius: 10px;
+}
+
+.carousel-slide-item div {
+    width: 200px;
+    height: 20px;
+}
+
+.slide-item-animation {
+    animation-name: resize;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    -webkit-animation-name: resize;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    -moz-animation-name: resize;
+    -moz-animation-duration: 3s;
+    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-iteration-count: 1;
+    -o-animation-name: resize;
+    -o-animation-duration: 3s;
+    -o-animation-timing-function: ease-in-out;
+    -o-animation-iteration-count: 1;
+}
+
+.left {
+    width: 100px!important;
+    float: left;
+}
+
+.right {
+    width: 100px!important;
+    float: right;
+}
+
+@media screen and (max-width: 25em) {
+    .carousel-container {
+        padding: 70px 0;
+        margin: 50px auto;
+        width: 250px;
+        height: 550px;
+        position: relative;
+        perspective: 1000px;
+    }
+    .carousel {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+    }
+    .carousel img {
+        width:200px;
+        height:200px;
+        margin-top: 10px;
+    }
+    .carousel-slide-item {
+        display: block;
+        position: absolute;
+        background:#000;
+        width: 200px;
+        height: auto;
+        font-size: large;
+        text-align: center;
+        color: #FFF;
+        opacity: 0.95;
+        border-radius: 10px;
+    }
+    .carousel-slide-item div {
+        width: 200px;
+        height: 20px;
+        font-size: 15px;
+    }
+}
