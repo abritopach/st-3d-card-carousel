@@ -6,7 +6,9 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  CardItem,
+} from './models/cardItem.model';
 
 export namespace Components {
   interface MyComponent {
@@ -23,7 +25,9 @@ export namespace Components {
     */
     'middle': string;
   }
-  interface St3dCardCarousel {}
+  interface St3dCardCarousel {
+    'slides': CardItem[];
+  }
 }
 
 declare global {
@@ -61,7 +65,10 @@ declare namespace LocalJSX {
     */
     'middle'?: string;
   }
-  interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {}
+  interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
+    'onSelectedItem'?: (event: CustomEvent<any>) => void;
+    'slides'?: CardItem[];
+  }
 
   interface IntrinsicElements {
     'my-component': MyComponent;
