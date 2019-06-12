@@ -1,22 +1,25 @@
-import { Component, h, Prop, Event, EventEmitter, Listen, Element } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter/*, Listen*/, Element } from '@stencil/core';
 import { CardItem } from '../../models/cardItem.model';
 // import * as Hammer from 'hammerjs';
 
 @Component({
   tag: 'st-3d-card-carousel',
   styleUrl: 'st-3d-card-carousel.css',
-  shadow: true,
+  shadow: false,
 })
 export class St3dCardCarousel  {
 
   private items: CardItem[] = [];
   private readonly tz: number = 250;
+  private currentDeg: number = 0;
   @Prop() slides: CardItem[] = [];
   @Event() selectedItem: EventEmitter;
+  /*
   @Listen('selectedItem')
   selectedItemHandler(event: CustomEvent) {
     console.log('@Listen selectedItemHandler', event.detail);
   }
+  */
   @Element() htmlEl: HTMLElement;
 
   componentWillLoad() {
@@ -238,11 +241,22 @@ export class St3dCardCarousel  {
   componentDidLoad() {
     console.log('St3dCardCarousel::componentDidLoad() | method called');
     // let carousel = this.htmlEl.querySelector('.carousel');
-    let carousel = this.htmlEl.shadowRoot.querySelector('.carousel');
+
+    let myElement = document.getElementById('myElement');
+    let mc = new Hammer(myElement);
+    // listen to events...
+    mc.on("panleft panright tap press", function(ev) {
+      myElement.textContent = ev.type +" gesture detected.";
+    });
+
+    // let carousel = this.htmlEl.shadowRoot.querySelector('.carousel') as HTMLElement;
+    let carousel = document.getElementById('carousel');
     console.log('carousel', carousel);
 
     if ((typeof carousel !== 'undefined') && (carousel !== null)) {
-      // let mc = new Hammer(carousel);
+      let mc = new Hammer(carousel);
+
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
       /*
       let mc = new Hammer.Manager(carousel, {
@@ -251,6 +265,7 @@ export class St3dCardCarousel  {
           [Hammer.Swipe,{ direction: Hammer.DIRECTION_ALL }],
         ]
       });
+      */
 
 
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
@@ -267,7 +282,6 @@ export class St3dCardCarousel  {
             this.applyStyle();
           }
       }).bind(this));
-      */
     }
   }
 
@@ -275,9 +289,33 @@ export class St3dCardCarousel  {
     console.log('St3dCardCarousel::componentWillUpdate() | method called');
   }
 
-  onHandleClick(item) {
+  onHandleClick(item: CardItem) {
     console.log('St3dCardCarousel::onHandleClick() | method called', item);
     this.selectedItem.emit(item);
+    this.applyResizeStyle(item);
+    setTimeout(() => {
+      this.resetResizeStyle(item);
+    },3000);
+  }
+
+  applyStyle() {
+    let ele = this.htmlEl.querySelector('.carousel');
+    ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
+    ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
+    ele.setAttribute("style", "-o-transform: rotateY(" + this.currentDeg + "deg)");
+    ele.setAttribute("style", "transform: rotateY(" + this.currentDeg + "deg)");
+  }
+
+  applyResizeStyle(item: CardItem) {
+    console.log('St3dCardCarousel::applyResizeStyle(item) | method called', item);
+    let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    ele.classList.add("slide-item-animation");
+  }
+
+  resetResizeStyle(item: CardItem) {
+    console.log('St3dCardCarousel::resetResizeStyle(item) | method called', item);
+    let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    ele.classList.remove("slide-item-animation");
   }
 
   render() {
@@ -310,11 +348,12 @@ export class St3dCardCarousel  {
         );
       });
     return (
-        <div class="carousel-container">
-            <div class="carousel">
+        [<div class="carousel-container">
+            <div id="carousel" class="carousel">
                 {items}
             </div>
-        </div>
+        </div>,
+        <div id="myElement"></div>]
     )
   }
 }
