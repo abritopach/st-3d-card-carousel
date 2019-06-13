@@ -90,11 +90,13 @@ i {
 .left {
     width: 100px!important;
     float: left;
+    padding-bottom: 10px;
 }
 
 .right {
     width: 100px!important;
     float: right;
+    padding-bottom: 10px;
 }
 
 @media screen and (max-width: 25em) {

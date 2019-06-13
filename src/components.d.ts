@@ -11,68 +11,44 @@ import {
 } from './models/cardItem.model';
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
   interface St3dCardCarousel {
+    'autoloop': { enabled: boolean; seconds: number; };
     'slides': CardItem[];
   }
+  interface TestCarousel {}
 }
 
 declare global {
 
-
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
-  };
 
   interface HTMLSt3dCardCarouselElement extends Components.St3dCardCarousel, HTMLStencilElement {}
   var HTMLSt3dCardCarouselElement: {
     prototype: HTMLSt3dCardCarouselElement;
     new (): HTMLSt3dCardCarouselElement;
   };
+
+  interface HTMLTestCarouselElement extends Components.TestCarousel, HTMLStencilElement {}
+  var HTMLTestCarouselElement: {
+    prototype: HTMLTestCarouselElement;
+    new (): HTMLTestCarouselElement;
+  };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
     'st-3d-card-carousel': HTMLSt3dCardCarouselElement;
+    'test-carousel': HTMLTestCarouselElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
   interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
+    'autoloop'?: { enabled: boolean; seconds: number; };
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'slides'?: CardItem[];
   }
+  interface TestCarousel extends JSXBase.HTMLAttributes<HTMLTestCarouselElement> {}
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
     'st-3d-card-carousel': St3dCardCarousel;
+    'test-carousel': TestCarousel;
   }
 }
 
