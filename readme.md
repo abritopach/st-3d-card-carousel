@@ -14,6 +14,10 @@ Stencil combines the best concepts of the most popular frontend frameworks into 
 
 Stencil components are just Web Components, so they work in any major framework or with no framework at all.
 
+## Component preview
+
+![Component](readme_resources/component.gif "Component")
+
 ## Getting Started
 
 Before you go through this example, you should have at least a basic understanding of Stencil concepts.
