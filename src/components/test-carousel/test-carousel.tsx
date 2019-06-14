@@ -45,10 +45,12 @@ export class TestCarousel {
   }
 
   render() {
+    let buttonClass = 'button';
     return (
       <div>
+        <h3>Stencil component for testing an experimental 3D card carousel Web Component.</h3>
         <st-3D-card-carousel slides={this.slides}></st-3D-card-carousel>
-        <button onClick={this.handleClick.bind(this)}>Load more</button>
+        <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
       </div>
     );
   }

@@ -32,10 +32,15 @@ i {
     padding: 70px 0;
     margin: 50px auto;
     width: 200px;
-    height: 550px;
+    height: 400px;
     position: relative;
     perspective: 1000px;
     touch-action: pan-y;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 .carousel {
     height: 100%;
