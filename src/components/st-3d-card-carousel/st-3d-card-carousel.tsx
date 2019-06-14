@@ -14,6 +14,7 @@ export class St3dCardCarousel  {
   private items: CardItem[] = [];
   private readonly tz: number = 250;
   private currentDeg: number = 0;
+  private autoloopTask = null;
   @Prop() slides: CardItem[] = [];
   @Prop() autoloop = {
     enabled: false,
@@ -62,6 +63,7 @@ export class St3dCardCarousel  {
 
   componentWillUpdate() {
     console.log('St3dCardCarousel::componentWillUpdate() | method called');
+    this.checkAutoLoop();
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = this.slides;
       let degree = 0;
@@ -103,10 +105,12 @@ export class St3dCardCarousel  {
 
   checkAutoLoop() {
     if (this.autoloop.enabled) {
-      setInterval(() => {
+      this.autoloopTask = setInterval(() => {
         this.currentDeg = this.currentDeg + 60;
         this.applyStyle();
       }, this.autoloop.seconds); // Fires every 2 seconds by default. } }
+    } else {
+      if (this.autoloopTask) clearInterval(this.autoloopTask);
     }
   }
 
