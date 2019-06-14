@@ -1,8 +1,13 @@
 {
-  "name": "st-3d-card-carousel",
+  "name": "st-three-dimensional-card-carousel",
   "version": "0.0.1",
   "description": "Experimental 3D card carousel Web Component built with Stencil.",
   "author": "Adrián Brito <adrbrpa1988@gmail.com> (https://github.com/abritopach)",
+  "keywords": ["stencil", "stenciljs", "stencil-component", "stenciljs-component", "webcomponents"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abritopach/st-3d-card-carousel"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
