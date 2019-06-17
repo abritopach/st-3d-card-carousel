@@ -154,11 +154,21 @@ export class St3dCardCarousel  {
           <div class={myClass} style={divStyle} onClick={ () => this.onHandleClick(this.items[index])}>
           {item.imgUrl ? <img src={item.imgUrl}/> :  []}
           <h2>{item.title}</h2>
-          {item.subtitle.icon ?
+          {item.subtitle && item.subtitle.icon && item.subtitle.text ?
             <p><i style={iconStyles} class={item.subtitle.icon}></i> {item.subtitle.text}</p>
-            : <p>{item.subtitle.text}</p>
+            : null
           }
-          <p>{item.description}</p>
+          {item.subtitle && !item.subtitle.icon && item.subtitle.text  ?
+            <p>{item.subtitle.text}</p>
+            : null
+          }
+          {
+            !item.description
+            ? null
+            : (
+              <p>{item.description}</p>
+            )
+          }
           <div>
           {item.footer
             ? [<div class="left">{item.footer.values.leftValue} <i style={iconStyles} class={item.footer.icons.leftIcon}></i></div>,

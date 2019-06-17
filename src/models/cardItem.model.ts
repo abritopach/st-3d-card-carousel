@@ -1,10 +1,10 @@
 export interface CardItem {
     id: number;
     title: string;
-    description: string;
-    subtitle: {
+    description?: string;
+    subtitle?: {
         text: string;
-        icon: string;
+        icon?: string;
     };
     color: string;
     imgUrl: string;
