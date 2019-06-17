@@ -1,13 +1,13 @@
 import { Component, h, Prop, Event, EventEmitter/*, Listen*/, Element } from '@stencil/core';
 import { CardItem } from '../../models/cardItem.model';
-// import * as Hammer from 'hammerjs';
+import 'hammerjs';
 
 import { CardItemsService } from '../../services/fake-card-items.service';
 
 @Component({
   tag: 'st-3d-card-carousel',
   styleUrl: 'st-3d-card-carousel.css',
-  shadow: false,
+  shadow: true,
 })
 export class St3dCardCarousel  {
 
@@ -53,8 +53,8 @@ export class St3dCardCarousel  {
     this.checkAutoLoop();
 
     // let carousel = this.htmlEl.querySelector('.carousel');
-    // let carousel = this.htmlEl.shadowRoot.querySelector('.carousel') as HTMLElement;
-    let carousel = document.getElementById('carousel');
+    // let carousel = document.getElementById('carousel');
+    let carousel = this.htmlEl.shadowRoot.querySelector('.carousel') as HTMLElement;
 
     if ((typeof carousel !== 'undefined') && (carousel !== null)) {
       this.listenSwipeHammerEvent(carousel);
@@ -84,7 +84,8 @@ export class St3dCardCarousel  {
   }
 
   applyStyle() {
-    let ele = this.htmlEl.querySelector('.carousel');
+    // let ele = this.htmlEl.querySelector('.carousel');
+    let ele = this.htmlEl.shadowRoot.querySelector('.carousel');
     ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
     ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
     ele.setAttribute("style", "-o-transform: rotateY(" + this.currentDeg + "deg)");
@@ -93,13 +94,15 @@ export class St3dCardCarousel  {
 
   applyResizeStyle(item: CardItem) {
     // console.log('St3dCardCarousel::applyResizeStyle(item) | method called', item);
-    let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
     ele.classList.add("slide-item-animation");
   }
 
   resetResizeStyle(item: CardItem) {
     // console.log('St3dCardCarousel::resetResizeStyle(item) | method called', item);
-    let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
+    let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
     ele.classList.remove("slide-item-animation");
   }
 
