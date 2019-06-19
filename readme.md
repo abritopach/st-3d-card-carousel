@@ -18,9 +18,23 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ![Component](readme_resources/component.gif "Component")
 
+## Component properties
+
+| Property   | Attribute | Description | Type                                     | Default                                       |
+| ---------- | --------- | ----------- | ---------------------------------------- | --------------------------------------------- |
+| `autoloop` | --        |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
+| `slides`   | --        |             | `CardItem[]`                             | `[]`                                          |
+
+
+## Component events
+
+| Event          | Description | Type               |
+| -------------- | ----------- | ------------------ |
+| `selectedItem` |             | `CustomEvent<any>` |
+
 ## Getting Started
 
-Before you go through this example, you should have at least a basic understanding of Stencil concepts.
+Before you go through this component, you should have at least a basic understanding of Stencil concepts.
 
 ```bash
 git clone https://github.com/abritopach/st-3d-card-carousel
@@ -46,7 +60,6 @@ To run the unit tests for the components, run:
 npm test
 ```
 
-
 ## Naming Components
 
 When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
@@ -55,6 +68,75 @@ Instead, use a prefix that fits your company or any name for a group of related 
 
 
 ## Using this component
+
+
+### Ionic / Angular project
+
+1) Install the package.
+
+```bash
+npm install st-three-dimensional-card-carousel --save
+```
+
+2) Modify main.ts to import and make a call to defineCustomElements.
+
+```bash
+import { enableProdMode } from '@angular/core'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+
+import { AppModule } from './app/app.module'
+import { environment } from './environments/environment'
+
+import { defineCustomElements } from 'st-three-dimensional-card-carousel/dist/loader'
+
+if (environment.production) {
+  enableProdMode()
+}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(err => console.log(err))
+defineCustomElements(window)
+```
+
+3) Add the CUSTOM_ELEMENTS_SCHEMA.
+
+```bash
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { IonicModule } from '@ionic/angular'
+import { FormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
+
+import { HomePage } from './home.page'
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomePage,
+      },
+    ]),
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [HomePage],
+})
+export class HomePageModule {}
+```
+
+### Ionic project
+
+- Component in Ionic project: https://github.com/abritopach/ionic-employees-stitch-mongodb
+
+### Angular project
+
+### React project
+
+### Vue project
 
 ### Script tag
 
