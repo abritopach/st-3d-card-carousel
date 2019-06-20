@@ -132,7 +132,13 @@ export class HomePageModule {}
 
 - Component in Ionic project: https://github.com/abritopach/ionic-employees-stitch-mongodb
 
+![Component](readme_resources/component_ionic.gif "Component")
+
 ### Angular project
+
+- Component in Angular project: https://github.com/abritopach/angular-architecture
+
+![Component](readme_resources/component_angular.gif "Component")
 
 ### React project
 

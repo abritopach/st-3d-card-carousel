@@ -26,17 +26,17 @@ export class TestCarousel {
   }
 
   getCurrentSlides() {
-    if (this.start == this.items.length) {
+    if (this.start === this.items.length) {
         this.start = 0;
         this.end = 5;
     }
     this.slides = [];
-    for (var i = this.start; i <= this.end; i++) {
+    for (let i = this.start; i <= this.end; i++) {
         //this.slides.push(this.items[i]);
         this.slides = [
-            ...this.slides,
-            this.items[i]
-          ]
+          ...this.slides,
+          this.items[i]
+        ];
     }
 
     this.start = this.end + 1;
