@@ -14,17 +14,25 @@ export class St3dCardCarousel  {
   private items: CardItem[] = [];
   private readonly tz: number = 250;
   private currentDeg: number = 0;
+  private currentSlide: number = 1;
+  private readonly slidesToShow = 6;
   private autoloopTask = null;
   @Prop() slides: CardItem[] = [];
   @Prop() autoloop = {
     enabled: false,
     seconds: 2000
   };
+  @Prop() initialSlide: number = 0;
   @Event() selectedItem: EventEmitter;
+  @Event() currentItem: EventEmitter;
   /*
   @Listen('selectedItem')
   selectedItemHandler(event: CustomEvent) {
     console.log('@Listen selectedItemHandler', event.detail);
+  }
+  @Listen('currentItem')
+  currentItemHandler(event: CustomEvent) {
+    console.log('@Listen currentItemHandler', event.detail);
   }
   */
   @Element() htmlEl: HTMLElement;
@@ -40,7 +48,7 @@ export class St3dCardCarousel  {
     }
 
     let degree = 0;
-    this.items = this.items.slice(0, 6);
+    this.items = this.items.slice(0, this.slidesToShow);
     this.items.map((item) => {
         item.currentPlacement = degree;
         degree = degree + 60;
@@ -130,17 +138,33 @@ export class St3dCardCarousel  {
     */
     mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-    mc.on("swipeleft swiperight", (function(ev) {
+    mc.on("swipeleft swiperight", (ev => {
       if (ev.type == "swipeleft") {
+        this.currentSlide += 1;
+        if (this.currentSlide > this.slidesToShow) {
+          this.currentSlide = 1;
+        }
         this.currentDeg = this.currentDeg - 60;
         this.applyStyle();
       }
       if (ev.type == "swiperight") {
+        this.currentSlide -= 1;
+        if (this.currentSlide === 0) {
+          this.currentSlide = this.slidesToShow;
+        }
         this.currentDeg = this.currentDeg + 60;
         this.applyStyle();
       }
+      // console.log("currentSlide", this.currentSlide);
+      this.currentItem.emit(this.currentSlide);
     }).bind(this));
   }
+
+  /*
+  selectSlide(slideId: string) {
+
+  }
+  */
 
   render() {
     const items = this.items.map((item, index) => {

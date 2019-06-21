@@ -13,6 +13,7 @@ import {
 export namespace Components {
   interface St3dCardCarousel {
     'autoloop': { enabled: boolean; seconds: number; };
+    'initialSlide': number;
     'slides': CardItem[];
   }
   interface TestCarousel {}
@@ -41,6 +42,8 @@ declare global {
 declare namespace LocalJSX {
   interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
     'autoloop'?: { enabled: boolean; seconds: number; };
+    'initialSlide'?: number;
+    'onCurrentItem'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'slides'?: CardItem[];
   }

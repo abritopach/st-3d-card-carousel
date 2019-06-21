@@ -7,16 +7,18 @@
 
 ## Properties
 
-| Property   | Attribute | Description | Type                                     | Default                                       |
-| ---------- | --------- | ----------- | ---------------------------------------- | --------------------------------------------- |
-| `autoloop` | --        |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
-| `slides`   | --        |             | `CardItem[]`                             | `[]`                                          |
+| Property       | Attribute       | Description | Type                                     | Default                                       |
+| -------------- | --------------- | ----------- | ---------------------------------------- | --------------------------------------------- |
+| `autoloop`     | --              |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
+| `initialSlide` | `initial-slide` |             | `number`                                 | `0`                                           |
+| `slides`       | --              |             | `CardItem[]`                             | `[]`                                          |
 
 
 ## Events
 
 | Event          | Description | Type               |
 | -------------- | ----------- | ------------------ |
+| `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
 
 
