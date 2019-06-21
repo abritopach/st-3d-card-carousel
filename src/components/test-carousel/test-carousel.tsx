@@ -11,6 +11,7 @@ export class TestCarousel {
   private start: number = 0;
   private end: number = 5;
   private items: any;
+  @State() initialSlide: number = 3;
   @State() activeItem: number = 1;
   @State() slides: any;
   @State() autoloop = {
@@ -64,8 +65,9 @@ export class TestCarousel {
     return (
       <div>
         <h3>Stencil component for testing an experimental 3D card carousel Web Component.</h3>
-        <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} onCurrentItem={ev => this.currentItem(ev)}></st-3D-card-carousel>
+        <p>Initial slide: {this.initialSlide} </p>
         <p>Current slide: {this.activeItem} </p>
+        <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} onCurrentItem={ev => this.currentItem(ev)}></st-3D-card-carousel>
         <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
         <br></br>
         <br></br>

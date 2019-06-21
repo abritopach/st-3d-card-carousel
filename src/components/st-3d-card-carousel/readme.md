@@ -10,7 +10,7 @@
 | Property       | Attribute       | Description | Type                                     | Default                                       |
 | -------------- | --------------- | ----------- | ---------------------------------------- | --------------------------------------------- |
 | `autoloop`     | --              |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
-| `initialSlide` | `initial-slide` |             | `number`                                 | `0`                                           |
+| `initialSlide` | `initial-slide` |             | `number`                                 | `1`                                           |
 | `slides`       | --              |             | `CardItem[]`                             | `[]`                                          |
 
 

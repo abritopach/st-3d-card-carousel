@@ -22,7 +22,7 @@ export class St3dCardCarousel  {
     enabled: false,
     seconds: 2000
   };
-  @Prop() initialSlide: number = 0;
+  @Prop() initialSlide: number = 1;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   /*
@@ -59,6 +59,7 @@ export class St3dCardCarousel  {
     console.log('St3dCardCarousel::componentDidLoad() | method called');
 
     this.checkAutoLoop();
+    this.checkInitialSlide();
 
     // let carousel = this.htmlEl.querySelector('.carousel');
     // let carousel = document.getElementById('carousel');
@@ -125,6 +126,12 @@ export class St3dCardCarousel  {
     }
   }
 
+  checkInitialSlide() {
+    if (this.initialSlide !== 1) {
+      this.selectSlide(this.initialSlide);
+    }
+  }
+
   listenSwipeHammerEvent(carousel) {
     let mc = new Hammer(carousel);
 
@@ -160,11 +167,14 @@ export class St3dCardCarousel  {
     }).bind(this));
   }
 
-  /*
-  selectSlide(slideId: string) {
-
+  selectSlide(slideId: number) {
+    if (this.currentSlide !== slideId) {
+      this.currentDeg = - this.items[slideId - 1].currentPlacement;
+      this.applyStyle();
+      this.currentSlide = slideId;
+      this.currentItem.emit(this.currentSlide);
+    }
   }
-  */
 
   render() {
     const items = this.items.map((item, index) => {
