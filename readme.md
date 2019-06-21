@@ -16,20 +16,21 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Component preview
 
-![Component](readme_resources/component.gif "Component")
+![Component](readme_resources/component_preview.gif "Component")
 
 ## Component properties
 
-| Property   | Attribute | Description | Type                                     | Default                                       |
-| ---------- | --------- | ----------- | ---------------------------------------- | --------------------------------------------- |
-| `autoloop` | --        |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
-| `slides`   | --        |             | `CardItem[]`                             | `[]`                                          |
-
+| Property       | Attribute       | Description | Type                                     | Default                                       |
+| -------------- | --------------- | ----------- | ---------------------------------------- | --------------------------------------------- |
+| `autoloop`     | --              |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
+| `initialSlide` | `initial-slide` |             | `number`                                 | `1`                                           |
+| `slides`       | --              |             | `CardItem[]`                             | `[]`                                          |
 
 ## Component events
 
 | Event          | Description | Type               |
 | -------------- | ----------- | ------------------ |
+| `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
 
 ## Getting Started
