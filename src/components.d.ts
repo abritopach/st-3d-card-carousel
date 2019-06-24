@@ -15,6 +15,7 @@ export namespace Components {
     'autoloop': { enabled: boolean; seconds: number; };
     'initialSlide': number;
     'slides': CardItem[];
+    'slidesToShow': number;
   }
   interface TestCarousel {}
 }
@@ -46,6 +47,7 @@ declare namespace LocalJSX {
     'onCurrentItem'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'slides'?: CardItem[];
+    'slidesToShow'?: number;
   }
   interface TestCarousel extends JSXBase.HTMLAttributes<HTMLTestCarouselElement> {}
 

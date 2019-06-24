@@ -15,7 +15,6 @@ export class St3dCardCarousel  {
   private readonly tz: number = 250;
   private currentDeg: number = 0;
   private currentSlide: number = 1;
-  private readonly slidesToShow = 6;
   private autoloopTask = null;
   @Prop() slides: CardItem[] = [];
   @Prop() autoloop = {
@@ -23,6 +22,7 @@ export class St3dCardCarousel  {
     seconds: 2000
   };
   @Prop() initialSlide: number = 1;
+  @Prop() slidesToShow: number = 6;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   /*
@@ -127,8 +127,11 @@ export class St3dCardCarousel  {
   }
 
   checkInitialSlide() {
-    if (this.initialSlide !== 1) {
+    if ((this.initialSlide !== 1) && (this.initialSlide <= this.slidesToShow)) {
       this.selectSlide(this.initialSlide);
+    }
+    if (this.initialSlide > this.slidesToShow) {
+      console.log('St3dCardCarousel ERROR: Initial slide is greater than the number of slides to show.')
     }
   }
 
