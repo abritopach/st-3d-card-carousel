@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter/*, Listen*/, Element } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Listen, Element } from '@stencil/core';
 import { CardItem } from '../../models/cardItem.model';
 import 'hammerjs';
 
@@ -23,6 +23,7 @@ export class St3dCardCarousel  {
   };
   @Prop() initialSlide: number = 1;
   @Prop() slidesToShow: number = 6;
+  @Prop() keyboard: boolean = false;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   /*
@@ -36,6 +37,18 @@ export class St3dCardCarousel  {
   }
   */
   @Element() htmlEl: HTMLElement;
+
+  @Listen('keydown', { target: 'document' })
+  handleKeyDown(ev: KeyboardEvent) {
+    if (this.keyboard) {
+      if (ev.key === 'ArrowLeft'){
+        this.swipeLeftSlide();
+      }
+      if (ev.key === 'ArrowRight'){
+        this.swipeRightSlide();
+      }
+    }
+  }
 
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
@@ -150,24 +163,32 @@ export class St3dCardCarousel  {
 
     mc.on("swipeleft swiperight", (ev => {
       if (ev.type == "swipeleft") {
-        this.currentSlide += 1;
-        if (this.currentSlide > this.slidesToShow) {
-          this.currentSlide = 1;
-        }
-        this.currentDeg = this.currentDeg - 60;
-        this.applyStyle();
+        this.swipeLeftSlide();
       }
       if (ev.type == "swiperight") {
-        this.currentSlide -= 1;
-        if (this.currentSlide === 0) {
-          this.currentSlide = this.slidesToShow;
-        }
-        this.currentDeg = this.currentDeg + 60;
-        this.applyStyle();
+        this.swipeRightSlide();
       }
-      // console.log("currentSlide", this.currentSlide);
-      this.currentItem.emit(this.currentSlide);
     }).bind(this));
+  }
+
+  swipeLeftSlide() {
+    this.currentSlide += 1;
+    if (this.currentSlide > this.slidesToShow) {
+      this.currentSlide = 1;
+    }
+    this.currentDeg = this.currentDeg - 60;
+    this.applyStyle();
+    this.currentItem.emit(this.currentSlide);
+    this.currentItem.emit(this.currentSlide);
+  }
+
+  swipeRightSlide() {
+    this.currentSlide -= 1;
+    if (this.currentSlide === 0) {
+      this.currentSlide = this.slidesToShow;
+    }
+    this.currentDeg = this.currentDeg + 60;
+    this.applyStyle();
   }
 
   selectSlide(slideId: number) {
