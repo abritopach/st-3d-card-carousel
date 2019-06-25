@@ -1,4 +1,4 @@
-import { Component, State, h } from '@stencil/core';
+import { Component, State, h, Element } from '@stencil/core';
 import { CardItemsService } from '../../services/fake-card-items.service';
 
 @Component({
@@ -20,6 +20,8 @@ export class TestCarousel {
   };
   @State() slidesToShow: number = 6;
   @State() keyboard: boolean = false;
+
+  @Element() htmlEl: HTMLElement;
 
   componentWillLoad() {
     this.items = CardItemsService.getAll();
@@ -62,6 +64,21 @@ export class TestCarousel {
     this.activeItem = ev.detail;
   }
 
+  prevSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).prev();
+  }
+
+  nextSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).next();
+  }
+
+  cycle() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).cycle();
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -75,6 +92,10 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.handleClickAutoLoop.bind(this)}>AutoLoop</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.prevSlide.bind(this)}>Prev Slide</button>
+        <button class={buttonClass} onClick={this.nextSlide.bind(this)}>Next Slide</button>
       </div>
     );
   }

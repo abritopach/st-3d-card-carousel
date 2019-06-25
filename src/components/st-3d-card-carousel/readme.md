@@ -24,6 +24,39 @@
 | `selectedItem` |             | `CustomEvent<any>` |
 
 
+## Methods
+
+### `cycle() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
+### `next() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
+### `prev() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
+
 ## Dependencies
 
 ### Used by

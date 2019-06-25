@@ -35,6 +35,37 @@ Stencil components are just Web Components, so they work in any major framework 
 | `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
 
+## Methods
+
+### `cycle() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
+### `next() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
+### `prev() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
 ## Getting Started
 
 Before you go through this component, you should have at least a basic understanding of Stencil concepts.

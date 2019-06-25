@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter, Listen, Element } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Listen, Element, Method } from '@stencil/core';
 import { CardItem } from '../../models/cardItem.model';
 import 'hammerjs';
 
@@ -48,6 +48,25 @@ export class St3dCardCarousel  {
         this.swipeRightSlide();
       }
     }
+  }
+
+  @Method()
+  async prev(): Promise<CardItem> {
+    this.swipeRightSlide();
+    return this.slides[this.currentSlide];
+  }
+
+  @Method()
+  async next(): Promise<CardItem> {
+    this.swipeLeftSlide();
+    return this.slides[this.currentSlide];
+  }
+
+  @Method()
+  async cycle(): Promise<boolean> {
+    this.autoloop.enabled = !this.autoloop.enabled;
+    this.checkAutoLoop();
+    return this.autoloop.enabled;
   }
 
   componentWillLoad() {
@@ -131,8 +150,13 @@ export class St3dCardCarousel  {
   checkAutoLoop() {
     if (this.autoloop.enabled) {
       this.autoloopTask = setInterval(() => {
+        this.currentSlide -= 1;
+        if (this.currentSlide === 0) {
+          this.currentSlide = this.slidesToShow;
+        }
         this.currentDeg = this.currentDeg + 60;
         this.applyStyle();
+        this.currentItem.emit(this.currentSlide);
       }, this.autoloop.seconds); // Fires every 2 seconds by default. } }
     } else {
       if (this.autoloopTask) clearInterval(this.autoloopTask);
@@ -179,7 +203,6 @@ export class St3dCardCarousel  {
     this.currentDeg = this.currentDeg - 60;
     this.applyStyle();
     this.currentItem.emit(this.currentSlide);
-    this.currentItem.emit(this.currentSlide);
   }
 
   swipeRightSlide() {
@@ -189,6 +212,7 @@ export class St3dCardCarousel  {
     }
     this.currentDeg = this.currentDeg + 60;
     this.applyStyle();
+    this.currentItem.emit(this.currentSlide);
   }
 
   selectSlide(slideId: number) {

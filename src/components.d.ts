@@ -13,8 +13,11 @@ import {
 export namespace Components {
   interface St3dCardCarousel {
     'autoloop': { enabled: boolean; seconds: number; };
+    'cycle': () => Promise<boolean>;
     'initialSlide': number;
     'keyboard': boolean;
+    'next': () => Promise<CardItem>;
+    'prev': () => Promise<CardItem>;
     'slides': CardItem[];
     'slidesToShow': number;
   }
