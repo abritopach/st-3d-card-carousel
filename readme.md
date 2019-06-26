@@ -66,6 +66,16 @@ Type: `Promise<CardItem>`
 Type: `Promise<CardItem>`
 
 
+
+### `select(slideId: number) => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
 ## Getting Started
 
 Before you go through this component, you should have at least a basic understanding of Stencil concepts.

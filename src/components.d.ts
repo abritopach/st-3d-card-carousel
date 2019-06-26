@@ -18,6 +18,7 @@ export namespace Components {
     'keyboard': boolean;
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;
+    'select': (slideId: number) => Promise<CardItem>;
     'slides': CardItem[];
     'slidesToShow': number;
   }

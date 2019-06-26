@@ -69,6 +69,12 @@ export class St3dCardCarousel  {
     return this.autoloop.enabled;
   }
 
+  @Method()
+  async select(slideId: number): Promise<CardItem> {
+    this.selectSlide(slideId);
+    return this.slides[slideId];
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 

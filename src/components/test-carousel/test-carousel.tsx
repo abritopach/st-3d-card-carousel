@@ -79,6 +79,11 @@ export class TestCarousel {
     (cardCarouselElement as any).cycle();
   }
 
+  goToSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).select(4);
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -96,6 +101,9 @@ export class TestCarousel {
         <br></br>
         <button class={buttonClass} onClick={this.prevSlide.bind(this)}>Prev Slide</button>
         <button class={buttonClass} onClick={this.nextSlide.bind(this)}>Next Slide</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.goToSlide.bind(this)}>Go to slide 4</button>
       </div>
     );
   }

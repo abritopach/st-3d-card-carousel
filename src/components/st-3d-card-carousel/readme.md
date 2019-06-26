@@ -56,6 +56,16 @@ Type: `Promise<CardItem>`
 
 
 
+### `select(slideId: number) => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
 
 ## Dependencies
 
