@@ -19,7 +19,8 @@ export class St3dCardCarousel  {
   @Prop() slides: CardItem[] = [];
   @Prop() autoloop = {
     enabled: false,
-    seconds: 2000
+    seconds: 2000,
+    direction: 'right'
   };
   @Prop() initialSlide: number = 1;
   @Prop() slidesToShow: number = 6;
@@ -156,13 +157,12 @@ export class St3dCardCarousel  {
   checkAutoLoop() {
     if (this.autoloop.enabled) {
       this.autoloopTask = setInterval(() => {
-        this.currentSlide -= 1;
-        if (this.currentSlide === 0) {
-          this.currentSlide = this.slidesToShow;
+        if (this.autoloop.direction === 'left') {
+          this.swipeLeftSlide();
         }
-        this.currentDeg = this.currentDeg + 60;
-        this.applyStyle();
-        this.currentItem.emit(this.currentSlide);
+        else {
+          this.swipeRightSlide();
+        }
       }, this.autoloop.seconds); // Fires every 2 seconds by default. } }
     } else {
       if (this.autoloopTask) clearInterval(this.autoloopTask);

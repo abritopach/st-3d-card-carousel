@@ -20,13 +20,13 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Component properties
 
-| Property       | Attribute        | Description | Type                                     | Default                                       |
-| -------------- | ---------------- | ----------- | ---------------------------------------- | --------------------------------------------- |
-| `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; }` | `{     enabled: false,     seconds: 2000   }` |
-| `initialSlide` | `initial-slide`  |             | `number`                                 | `1`                                           |
-| `keyboard`     | `keyboard`       |             | `boolean`                                | `false`                                       |
-| `slides`       | --               |             | `CardItem[]`                             | `[]`                                          |
-| `slidesToShow` | `slides-to-show` |             | `number`                                 | `6`                                           |
+| Property       | Attribute        | Description | Type                                                        | Default                                                               |
+| -------------- | ---------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
+| `initialSlide` | `initial-slide`  |             | `number`                                                    | `1`                                                                   |
+| `keyboard`     | `keyboard`       |             | `boolean`                                                   | `false`                                                               |
+| `slides`       | --               |             | `CardItem[]`                                                | `[]`                                                                  |
+| `slidesToShow` | `slides-to-show` |             | `number`                                                    | `6`
 
 ## Component events
 
@@ -35,7 +35,7 @@ Stencil components are just Web Components, so they work in any major framework 
 | `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
 
-## Methods
+## Component public API methods
 
 ### `cycle() => Promise<boolean>`
 

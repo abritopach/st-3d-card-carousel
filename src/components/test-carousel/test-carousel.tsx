@@ -16,7 +16,8 @@ export class TestCarousel {
   @State() slides: any;
   @State() autoloop = {
     enabled: false,
-    seconds: 2000
+    seconds: 2000,
+    direction: 'right'
   };
   @State() slidesToShow: number = 6;
   @State() keyboard: boolean = false;
