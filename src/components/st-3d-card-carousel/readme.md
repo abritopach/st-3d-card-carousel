@@ -22,6 +22,7 @@
 | -------------- | ----------- | ------------------ |
 | `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
+| `slideChange`  |             | `CustomEvent<any>` |
 
 
 ## Methods

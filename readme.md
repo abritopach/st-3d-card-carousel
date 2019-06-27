@@ -34,6 +34,7 @@ Stencil components are just Web Components, so they work in any major framework 
 | -------------- | ----------- | ------------------ |
 | `currentItem`  |             | `CustomEvent<any>` |
 | `selectedItem` |             | `CustomEvent<any>` |
+| `slideChange`  |             | `CustomEvent<any>` |
 
 ## Component public API methods
 

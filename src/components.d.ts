@@ -52,6 +52,7 @@ declare namespace LocalJSX {
     'keyboard'?: boolean;
     'onCurrentItem'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
+    'onSlideChange'?: (event: CustomEvent<any>) => void;
     'slides'?: CardItem[];
     'slidesToShow'?: number;
   }

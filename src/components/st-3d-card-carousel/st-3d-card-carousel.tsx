@@ -27,6 +27,7 @@ export class St3dCardCarousel  {
   @Prop() keyboard: boolean = false;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
+  @Event() slideChange: EventEmitter;
   /*
   @Listen('selectedItem')
   selectedItemHandler(event: CustomEvent) {
@@ -144,6 +145,10 @@ export class St3dCardCarousel  {
     // console.log('St3dCardCarousel::applyResizeStyle(item) | method called', item);
     // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
     let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
+    /*
+    console.log('applyResizeStyle ele', ele);
+    ele.setAttribute('style', 'background-color: rgb(231, 76, 60); transform: rotateY(0) translateZ(250px);');
+    */
     ele.classList.add("slide-item-animation");
   }
 
@@ -151,6 +156,10 @@ export class St3dCardCarousel  {
     // console.log('St3dCardCarousel::resetResizeStyle(item) | method called', item);
     // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
     let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
+    /*
+    ele.setAttribute('style', 'background-color: rgb(231, 76, 60); transform: rotateY(120deg) translateZ(250px);');
+    console.log('resetResizeStyle ele', ele);
+    */
     ele.classList.remove("slide-item-animation");
   }
 
@@ -194,9 +203,11 @@ export class St3dCardCarousel  {
     mc.on("swipeleft swiperight", (ev => {
       if (ev.type == "swipeleft") {
         this.swipeLeftSlide();
+        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
       }
       if (ev.type == "swiperight") {
         this.swipeRightSlide();
+        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
       }
     }).bind(this));
   }

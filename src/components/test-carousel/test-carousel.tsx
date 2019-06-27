@@ -85,6 +85,10 @@ export class TestCarousel {
     (cardCarouselElement as any).select(4);
   }
 
+  slideChange(ev) {
+    console.log(ev.detail);
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -93,7 +97,7 @@ export class TestCarousel {
         <p>Initial slide: {this.initialSlide} </p>
         <p>Current slide: {this.activeItem} </p>
         <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
-        keyboard={this.keyboard} onCurrentItem={ev => this.currentItem(ev)}></st-3D-card-carousel>
+        keyboard={this.keyboard} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
         <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
         <br></br>
         <br></br>
