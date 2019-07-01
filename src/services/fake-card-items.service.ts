@@ -27,7 +27,7 @@ class FakeCardItemsService {
         {
             id: 2,
             title: 'User 2',
-            description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat molestie euismod. Etiam tincidunt luctus diam non ullamcorper. Maecenas eros est, iaculis hendrerit imperdiet nec, rhoncus in turpis. Vestibulum elementum mauris vitae nibh sagittis, et fermentum nunc aliquet. Donec sed ex sollicitudin, tristique sapien non, lacinia enim.',
             subtitle: {
               text: 'Spain',
               icon: "fa fa-flag"
@@ -53,7 +53,7 @@ class FakeCardItemsService {
         {
             id: 4,
             title: 'User 4',
-            description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat molestie euismod. Etiam tincidunt luctus diam non ullamcorper. Maecenas eros est, iaculis hendrerit imperdiet nec, rhoncus in turpis. Vestibulum elementum mauris vitae nibh sagittis, et fermentum nunc aliquet. Donec sed ex sollicitudin, tristique sapien non, lacinia enim.',
             subtitle: {
               text: 'Spain',
               icon: "fa fa-flag"

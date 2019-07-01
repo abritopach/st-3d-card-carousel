@@ -278,7 +278,7 @@ export class St3dCardCarousel  {
             !item.description
             ? null
             : (
-              <p>{item.description}</p>
+              <p class={'slide-description'}>{item.description}</p>
             )
           }
           <div>

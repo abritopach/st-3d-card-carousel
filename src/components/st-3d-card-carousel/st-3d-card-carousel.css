@@ -106,6 +106,14 @@ i {
     padding-bottom: 10px;
 }
 
+.slide-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @media screen and (max-width: 25em) {
     .carousel-container {
         padding: 70px 0;
