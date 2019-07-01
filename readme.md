@@ -23,6 +23,7 @@ Stencil components are just Web Components, so they work in any major framework 
 | Property       | Attribute        | Description | Type                                                        | Default                                                               |
 | -------------- | ---------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
 | `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
+| `distance`     | `distance`       |             | `number`                                                    | `undefined`
 | `initialSlide` | `initial-slide`  |             | `number`                                                    | `1`                                                                   |
 | `keyboard`     | `keyboard`       |             | `boolean`                                                   | `false`                                                               |
 | `slides`       | --               |             | `CardItem[]`                                                | `[]`                                                                  |

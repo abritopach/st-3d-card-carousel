@@ -12,7 +12,7 @@ import { CardItemsService } from '../../services/fake-card-items.service';
 export class St3dCardCarousel  {
 
   private items: CardItem[] = [];
-  private readonly tz: number = 250;
+  private tz: number = 250;
   private currentDeg: number = 0;
   private currentSlide: number = 1;
   private autoloopTask = null;
@@ -25,6 +25,7 @@ export class St3dCardCarousel  {
   @Prop() initialSlide: number = 1;
   @Prop() slidesToShow: number = 6;
   @Prop() keyboard: boolean = false;
+  @Prop() distance: number;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -87,6 +88,8 @@ export class St3dCardCarousel  {
       this.items = this.slides;
     }
 
+    this.checkDistance();
+
     let degree = 0;
     this.items = this.items.slice(0, this.slidesToShow);
     this.items.map((item) => {
@@ -112,6 +115,7 @@ export class St3dCardCarousel  {
 
   componentWillUpdate() {
     console.log('St3dCardCarousel::componentWillUpdate() | method called');
+    this.checkDistance();
     this.checkAutoLoop();
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = this.slides;
@@ -161,6 +165,12 @@ export class St3dCardCarousel  {
     console.log('resetResizeStyle ele', ele);
     */
     ele.classList.remove("slide-item-animation");
+  }
+
+  checkDistance() {
+    if ((this.distance !== null) && (typeof this.distance !== 'undefined')) {
+      this.tz = this.distance;
+    }
   }
 
   checkAutoLoop() {
