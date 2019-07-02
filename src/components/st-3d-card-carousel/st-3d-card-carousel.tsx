@@ -26,6 +26,7 @@ export class St3dCardCarousel  {
   @Prop() slidesToShow: number = 6;
   @Prop() keyboard: boolean = false;
   @Prop() distance: number;
+  @Prop() animationSelectedSlide: boolean = true;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -130,10 +131,12 @@ export class St3dCardCarousel  {
   onHandleClick(item: CardItem) {
     console.log('St3dCardCarousel::onHandleClick() | method called', item);
     this.selectedItem.emit(item);
-    this.applyResizeStyle(item);
-    setTimeout(() => {
-      this.resetResizeStyle(item);
-    },3000);
+    if (this.animationSelectedSlide) {
+      this.applyResizeStyle(item);
+      setTimeout(() => {
+        this.resetResizeStyle(item);
+      },3000);
+    }
   }
 
   applyStyle() {

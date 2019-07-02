@@ -22,6 +22,7 @@ export class TestCarousel {
   @State() slidesToShow: number = 6;
   @State() keyboard: boolean = false;
   @State() distance: number = 200;
+  @State() animationSelectedSlide: boolean = true;
 
   @Element() htmlEl: HTMLElement;
 
@@ -98,7 +99,8 @@ export class TestCarousel {
         <p>Initial slide: {this.initialSlide} </p>
         <p>Current slide: {this.activeItem} </p>
         <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
-        keyboard={this.keyboard} distance={this.distance} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
+        animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance} onCurrentItem={ev => this.currentItem(ev)} 
+        onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
         <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
         <br></br>
         <br></br>

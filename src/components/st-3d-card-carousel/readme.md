@@ -7,14 +7,15 @@
 
 ## Properties
 
-| Property       | Attribute        | Description | Type                                                        | Default                                                               |
-| -------------- | ---------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
-| `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
-| `distance`     | `distance`       |             | `number`                                                    | `undefined`                                                           |
-| `initialSlide` | `initial-slide`  |             | `number`                                                    | `1`                                                                   |
-| `keyboard`     | `keyboard`       |             | `boolean`                                                   | `false`                                                               |
-| `slides`       | --               |             | `CardItem[]`                                                | `[]`                                                                  |
-| `slidesToShow` | `slides-to-show` |             | `number`                                                    | `6`                                                                   |
+| Property                 | Attribute                  | Description | Type                                                        | Default                                                               |
+| ------------------------ | -------------------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| `animationSelectedSlide` | `animation-selected-slide` |             | `boolean`                                                   | `true`                                                                |
+| `autoloop`               | --                         |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
+| `distance`               | `distance`                 |             | `number`                                                    | `undefined`                                                           |
+| `initialSlide`           | `initial-slide`            |             | `number`                                                    | `1`                                                                   |
+| `keyboard`               | `keyboard`                 |             | `boolean`                                                   | `false`                                                               |
+| `slides`                 | --                         |             | `CardItem[]`                                                | `[]`                                                                  |
+| `slidesToShow`           | `slides-to-show`           |             | `number`                                                    | `6`                                                                   |
 
 
 ## Events

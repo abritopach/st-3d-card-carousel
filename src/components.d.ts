@@ -12,6 +12,7 @@ import {
 
 export namespace Components {
   interface St3dCardCarousel {
+    'animationSelectedSlide': boolean;
     'autoloop': { enabled: boolean; seconds: number; direction: string; };
     'cycle': () => Promise<boolean>;
     'distance': number;
@@ -48,6 +49,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
+    'animationSelectedSlide'?: boolean;
     'autoloop'?: { enabled: boolean; seconds: number; direction: string; };
     'distance'?: number;
     'initialSlide'?: number;
