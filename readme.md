@@ -175,21 +175,59 @@ import { HomePage } from './home.page'
 export class HomePageModule {}
 ```
 
-### Ionic project
+### Vue project
+
+1) Install the package.
+
+```bash
+npm install st-three-dimensional-card-carousel --save
+```
+
+2) Modify main.js to import and make a call to defineCustomElements.
+
+
+```bash
+import Vue from 'vue'
+import App from './App.vue'
+
+import { defineCustomElements, applyPolyfills } from 'st-three-dimensional-card-carousel/loader';
+
+Vue.config.productionTip = false
+
+// tell Vue to ignore all components defined in the st-three-dimensional-card-carousel/loader
+// package. The regex assumes all components names are prefixed.
+// 'st'
+Vue.config.ignoredElements = [/st-\w*/];
+
+// Bind the custom elements to the window object.
+applyPolyfills().then(() => {
+  defineCustomElements(window);
+});
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+```
+
+### Example Ionic project
 
 - Component in Ionic project: https://github.com/abritopach/ionic-employees-stitch-mongodb
 
 ![Component](readme_resources/component_ionic.gif "Component")
 
-### Angular project
+### Example Angular project
 
 - Component in Angular project: https://github.com/abritopach/angular-architecture
 
 ![Component](readme_resources/component_angular.gif "Component")
 
-### React project
+### Example React project
 
-### Vue project
+### Example Vue project
+
+- Component in Vue project: https://github.com/abritopach/vue-stencil-3d-card-carousel
+
+![Component](readme_resources/component_vue.gif "Component")
 
 ### Script tag
 
