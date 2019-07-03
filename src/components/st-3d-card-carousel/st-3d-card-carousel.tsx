@@ -27,6 +27,16 @@ export class St3dCardCarousel  {
   @Prop() keyboard: boolean = false;
   @Prop() distance: number;
   @Prop() animationSelectedSlide: boolean = true;
+  /*
+    width: '200px',
+    height: 'auto',
+    border: 'none',
+    'border-radius': '10px',
+    'opacity': '0.95',
+    'color': 'white'
+    */
+  @Prop() slideStyle = {
+  };
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -259,12 +269,13 @@ export class St3dCardCarousel  {
         let divStyle = {
           'background-color': item.color,
           'transform': 'rotateY(-'+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
-          '-webkit-transform': 'rotateY('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)'
+          '-webkit-transform': 'rotateY('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
         };
         let iconStyles = {
           color: 'white'
         };
         let myClass = 'carousel-slide-item slide-item' + item.id;
+        if (this.slideStyle) divStyle = {...divStyle, ...this.slideStyle}
         return (
           <div class={myClass} style={divStyle} onClick={ () => this.onHandleClick(this.items[index])}>
           {item.imgUrl ? <img src={item.imgUrl}/> :  []}

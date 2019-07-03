@@ -21,6 +21,7 @@ export namespace Components {
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;
     'select': (slideId: number) => Promise<CardItem>;
+    'slideStyle': {};
     'slides': CardItem[];
     'slidesToShow': number;
   }
@@ -57,6 +58,7 @@ declare namespace LocalJSX {
     'onCurrentItem'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'onSlideChange'?: (event: CustomEvent<any>) => void;
+    'slideStyle'?: {};
     'slides'?: CardItem[];
     'slidesToShow'?: number;
   }

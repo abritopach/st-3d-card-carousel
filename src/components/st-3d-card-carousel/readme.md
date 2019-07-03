@@ -14,6 +14,7 @@
 | `distance`               | `distance`                 |             | `number`                                                    | `undefined`                                                           |
 | `initialSlide`           | `initial-slide`            |             | `number`                                                    | `1`                                                                   |
 | `keyboard`               | `keyboard`                 |             | `boolean`                                                   | `false`                                                               |
+| `slideStyle`             | --                         |             | `{}`                                                        | `{   }`                                                               |
 | `slides`                 | --                         |             | `CardItem[]`                                                | `[]`                                                                  |
 | `slidesToShow`           | `slides-to-show`           |             | `number`                                                    | `6`                                                                   |
 
