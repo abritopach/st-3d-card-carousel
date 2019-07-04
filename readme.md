@@ -2,9 +2,13 @@
 
 # Stencil 3D Card Carousel
 
+[![Ask me anything](https://img.shields.io/badge/ask%20me-anything-1abc9c.svg)](https://github.com/abritopach) [![Version](https://img.shields.io/npm/v/st-three-dimensional-card-carousel.svg)](https://www.npmjs.com/package/st-three-dimensional-card-carousel) [![Downloads](https://img.shields.io/npm/dt/st-three-dimensional-card-carousel.svg)](https://www.npmjs.com/package/st-three-dimensional-card-carousel)
+
 Sample project that shows an experimental 3D card carousel Web Component built with Stencil.
 
 Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
+
+<a href="https://www.buymeacoffee.com/h6WVj4HcD" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
 
 # Stencil
 
