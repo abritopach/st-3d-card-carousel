@@ -153,3 +153,41 @@ i {
         font-size: 15px;
     }
 }
+
+.icon {
+    position: absolute;
+    display: inline-block;
+    color: #666;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.icon:after, .icon:before {
+  content: "";
+  box-sizing: border-box;
+}
+
+.icon-arrow {
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top: 7px solid;
+    border-right: 7px solid;
+    margin: 15px;
+}
+
+.icon-arrow-left{
+    transform: rotate(-135deg);
+}
+
+.icon-arrow-right {
+    transform: rotate(45deg);
+    margin-left: 25px;
+}
+
+.controls {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+}

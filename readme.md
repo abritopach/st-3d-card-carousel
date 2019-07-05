@@ -28,6 +28,7 @@ Stencil components are just Web Components, so they work in any major framework 
 | -------------- | ---------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
 | `animationSelectedSlide` | `animation-selected-slide` |             | `boolean`                               | `true`
 | `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
+| `controls`     | --               |             | `{ enabled: boolean; }`                                     | `{     enabled: false   }`
 | `distance`     | `distance`       |             | `number`                                                    | `undefined`
 | `initialSlide` | `initial-slide`  |             | `number`                                                    | `1`                                                                   |
 | `keyboard`     | `keyboard`       |             | `boolean`                                                   | `false`

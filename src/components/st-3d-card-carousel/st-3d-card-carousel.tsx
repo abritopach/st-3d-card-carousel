@@ -27,6 +27,9 @@ export class St3dCardCarousel  {
   @Prop() keyboard: boolean = false;
   @Prop() distance: number;
   @Prop() animationSelectedSlide: boolean = true;
+  @Prop() controls = {
+    enabled: false
+  }
   /*
     width: '200px',
     height: 'auto',
@@ -264,6 +267,28 @@ export class St3dCardCarousel  {
     }
   }
 
+  onHandleClickArrowLeft() {
+    console.log('St3dCardCarousel::onHandleClickArrowLeft() | method called');
+    this.swipeLeftSlide();
+  }
+
+  onHandleClickArrowRight() {
+    console.log('St3dCardCarousel::onHandleClickArrowRight() | method called');
+    this.swipeRightSlide();
+  }
+
+  showControls() {
+    if (!this.controls.enabled) {
+      return null;
+    }
+    return (
+      <div class="controls">
+        <i class="icon icon-arrow icon-arrow-left" onClick={ () => this.onHandleClickArrowLeft()}></i>
+        <i class="icon icon-arrow icon-arrow-right" onClick={ () => this.onHandleClickArrowRight()}></i>
+      </div>
+    );
+  }
+
   render() {
     const items = this.items.map((item, index) => {
         let divStyle = {
@@ -308,11 +333,15 @@ export class St3dCardCarousel  {
         );
       });
     return (
-        [<div class="carousel-container">
+        [
+        this.showControls()
+        ,
+        <div class="carousel-container">
             <div id="carousel" class="carousel">
                 {items}
             </div>
-        </div>]
+        </div>
+        ]
     )
   }
 }
