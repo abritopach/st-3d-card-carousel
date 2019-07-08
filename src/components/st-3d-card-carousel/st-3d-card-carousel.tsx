@@ -28,7 +28,9 @@ export class St3dCardCarousel  {
   @Prop() distance: number;
   @Prop() animationSelectedSlide: boolean = true;
   @Prop() controls = {
-    enabled: false
+    enabled: false,
+    position: 'top',
+    text: ['prev', 'next']
   }
   /*
     width: '200px',
@@ -40,6 +42,7 @@ export class St3dCardCarousel  {
     */
   @Prop() slideStyle = {
   };
+  @Prop() axis: string = 'horizontal';
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -277,12 +280,16 @@ export class St3dCardCarousel  {
     this.swipeRightSlide();
   }
 
-  showControls() {
+  showControls(position) {
     if (!this.controls.enabled) {
       return null;
     }
+    if (this.controls.position !== position) {
+      return null;
+    }
+    let controlsClass = this.controls.position === 'bottom' ? 'controls controls-bottom' : 'controls';
     return (
-      <div class="controls">
+      <div class={controlsClass}>
         <i class="icon icon-arrow icon-arrow-left" onClick={ () => this.onHandleClickArrowLeft()}></i>
         <i class="icon icon-arrow icon-arrow-right" onClick={ () => this.onHandleClickArrowRight()}></i>
       </div>
@@ -334,13 +341,14 @@ export class St3dCardCarousel  {
       });
     return (
         [
-        this.showControls()
+        this.showControls('top')
         ,
         <div class="carousel-container">
             <div id="carousel" class="carousel">
                 {items}
             </div>
-        </div>
+        </div>,
+        this.showControls('bottom')
         ]
     )
   }

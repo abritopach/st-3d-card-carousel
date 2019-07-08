@@ -1,6 +1,6 @@
 {
   "name": "st-three-dimensional-card-carousel",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Experimental 3D card carousel Web Component built with Stencil.",
   "author": "Adrián Brito <adrbrpa1988@gmail.com> (https://github.com/abritopach)",
   "keywords": [
@@ -33,7 +33,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "devDependencies": {
-    "@stencil/core": "1.1.2",
+    "@stencil/core": "1.1.5",
     "@types/hammerjs": "^2.0.36"
   },
   "license": "MIT",

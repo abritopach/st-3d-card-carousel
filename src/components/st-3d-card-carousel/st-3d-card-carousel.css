@@ -191,3 +191,7 @@ i {
     -webkit-transform: translate(-50%);
     transform: translate(-50%);
 }
+
+.controls-bottom {
+    margin-top: -50px;
+}
