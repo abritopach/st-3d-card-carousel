@@ -77,8 +77,17 @@ Type: `Promise<CardItem>`
 
 
 
-### `select(slideId: number) => Promise<CardItem>`
+### `select(slideId: string | number) => Promise<CardItem>`
 
+```bash
+Go to specific slide by number or keywords.
+
+.select(3);
+.select('prev');
+.select('next');
+.select('first');
+.select('last');
+```
 
 
 #### Returns

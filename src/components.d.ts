@@ -22,7 +22,7 @@ export namespace Components {
     'keyboard': boolean;
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;
-    'select': (slideId: number) => Promise<CardItem>;
+    'select': (slideId: string | number) => Promise<CardItem>;
     'slideStyle': {};
     'slides': CardItem[];
     'slidesToShow': number;

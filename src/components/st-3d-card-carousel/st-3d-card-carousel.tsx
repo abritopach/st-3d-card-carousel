@@ -90,7 +90,7 @@ export class St3dCardCarousel  {
   }
 
   @Method()
-  async select(slideId: number): Promise<CardItem> {
+  async select(slideId: number | string): Promise<CardItem> {
     this.selectSlide(slideId);
     return this.slides[slideId];
   }
@@ -261,9 +261,36 @@ export class St3dCardCarousel  {
     this.currentItem.emit(this.currentSlide);
   }
 
-  selectSlide(slideId: number) {
+  getSlideIndex(slideId: string) {
+    switch(slideId) {
+      case 'prev': {
+        return this.currentSlide - 1;
+      }
+      case 'next': {
+        return this.currentSlide + 1;
+      }
+      case 'first': {
+        return 0;
+      }
+      case 'last': {
+        return this.slidesToShow;
+      }
+      default: {
+         break;
+      }
+   }
+  }
+
+  selectSlide(slideId: number | string) {
+
+    if (typeof slideId === "string") {
+      slideId = this.getSlideIndex(slideId);
+    }
+
     if (this.currentSlide !== slideId) {
-      this.currentDeg = - this.items[slideId - 1].currentPlacement;
+      let index = slideId - 1;
+      if (slideId === 0) index = 0;
+      this.currentDeg = - this.items[index].currentPlacement;
       this.applyStyle();
       this.currentSlide = slideId;
       this.currentItem.emit(this.currentSlide);
