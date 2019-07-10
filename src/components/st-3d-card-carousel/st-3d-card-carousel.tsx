@@ -16,6 +16,8 @@ export class St3dCardCarousel  {
   private currentDeg: number = 0;
   private currentSlide: number = 1;
   private autoloopTask = null;
+  private timer = 0;
+  private prevent = false;
   @Prop() slides: CardItem[] = [];
   @Prop() autoloop = {
     enabled: false,
@@ -46,6 +48,7 @@ export class St3dCardCarousel  {
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
+  @Event() slideDoubleTap: EventEmitter;
   /*
   @Listen('selectedItem')
   selectedItemHandler(event: CustomEvent) {
@@ -160,14 +163,26 @@ export class St3dCardCarousel  {
   }
 
   onHandleClick(item: CardItem) {
-    console.log('St3dCardCarousel::onHandleClick() | method called', item);
-    this.selectedItem.emit(item);
-    if (this.animationSelectedSlide) {
-      this.applyResizeStyle(item);
-      setTimeout(() => {
-        this.resetResizeStyle(item);
-      },3000);
-    }
+    this.timer = setTimeout(() => {
+      if (!this.prevent) {
+        console.log('St3dCardCarousel::onHandleClick() | method called', item);
+        this.selectedItem.emit(item);
+        if (this.animationSelectedSlide) {
+          this.applyResizeStyle(item);
+          setTimeout(() => {
+            this.resetResizeStyle(item);
+          },3000);
+        }
+      }
+      this.prevent = false;
+    }, 200);
+  }
+
+  onHandleDoubleClick(item: CardItem) {
+    console.log('St3dCardCarousel::onHandleDoubleClick() | method called', item);
+    clearTimeout(this.timer);
+    this.prevent = true;
+    this.slideDoubleTap.emit(item);
   }
 
   applyStyle() {
@@ -351,7 +366,7 @@ export class St3dCardCarousel  {
         let myClass = 'carousel-slide-item slide-item' + item.id;
         if (this.slideStyle) divStyle = {...divStyle, ...this.slideStyle}
         return (
-          <div class={myClass} style={divStyle} onClick={ () => this.onHandleClick(this.items[index])}>
+          <div class={myClass} style={divStyle} onClick={ () => this.onHandleClick(this.items[index])} onDblClick={ () => this.onHandleDoubleClick(this.items[index])}>
           {item.imgUrl ? <img src={item.imgUrl}/> :  []}
           <h2>{item.title}</h2>
           {item.subtitle && item.subtitle.icon && item.subtitle.text ?

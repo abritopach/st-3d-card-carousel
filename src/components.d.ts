@@ -65,6 +65,7 @@ declare namespace LocalJSX {
     'onCurrentItem'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'onSlideChange'?: (event: CustomEvent<any>) => void;
+    'onSlideDoubleTap'?: (event: CustomEvent<any>) => void;
     'slideStyle'?: {};
     'slides'?: CardItem[];
     'slidesToShow'?: number;

@@ -23,11 +23,12 @@
 
 ## Events
 
-| Event          | Description | Type               |
-| -------------- | ----------- | ------------------ |
-| `currentItem`  |             | `CustomEvent<any>` |
-| `selectedItem` |             | `CustomEvent<any>` |
-| `slideChange`  |             | `CustomEvent<any>` |
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `currentItem`    |             | `CustomEvent<any>` |
+| `selectedItem`   |             | `CustomEvent<any>` |
+| `slideChange`    |             | `CustomEvent<any>` |
+| `slideDoubleTap` |             | `CustomEvent<any>` |
 
 
 ## Methods
