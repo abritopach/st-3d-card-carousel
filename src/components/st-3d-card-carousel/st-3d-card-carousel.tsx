@@ -95,6 +95,21 @@ export class St3dCardCarousel  {
     return this.slides[slideId];
   }
 
+  @Method()
+  async getActiveIndex(): Promise<number> {
+    return this.currentSlide;
+  }
+
+  @Method()
+  async isBeginning(): Promise<boolean> {
+    return this.currentSlide === 0;
+  }
+
+  @Method()
+  async isEnd(): Promise<boolean> {
+    return this.currentSlide === this.slidesToShow;
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 

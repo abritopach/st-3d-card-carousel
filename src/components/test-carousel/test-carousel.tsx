@@ -34,6 +34,16 @@ export class TestCarousel {
   }
 
   componentDidLoad() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).getActiveIndex().then((activeIndex) => {
+      console.log("Active index: " + activeIndex);
+    });
+    (cardCarouselElement as any).isBeginning().then((result) => {
+      console.log("isBeginning: " + result);
+    });
+    (cardCarouselElement as any).isEnd().then((result) => {
+      console.log("isEnd: " + result);
+    });
   }
 
   getCurrentSlides() {

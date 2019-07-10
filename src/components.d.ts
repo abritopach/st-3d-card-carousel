@@ -18,7 +18,10 @@ export namespace Components {
     'controls': { enabled: boolean; position: string; text: string[]; };
     'cycle': () => Promise<boolean>;
     'distance': number;
+    'getActiveIndex': () => Promise<number>;
     'initialSlide': number;
+    'isBeginning': () => Promise<boolean>;
+    'isEnd': () => Promise<boolean>;
     'keyboard': boolean;
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;

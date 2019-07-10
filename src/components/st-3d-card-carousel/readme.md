@@ -42,6 +42,36 @@ Type: `Promise<boolean>`
 
 
 
+### `getActiveIndex() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
+### `isBeginning() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
+### `isEnd() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
 ### `next() => Promise<CardItem>`
 
 
