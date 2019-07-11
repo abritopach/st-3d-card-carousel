@@ -44,6 +44,15 @@ export class TestCarousel {
     (cardCarouselElement as any).isEnd().then((result) => {
       console.log("isEnd: " + result);
     });
+    (cardCarouselElement as any).getPreviousIndex().then((index) => {
+      console.log("Previous index slide: " + index);
+    });
+    (cardCarouselElement as any).getNextIndex().then((index) => {
+      console.log("Next index slide: " + index);
+    });
+    (cardCarouselElement as any).length().then((length) => {
+      console.log("Slides length: " + length);
+    });
   }
 
   getCurrentSlides() {

@@ -104,6 +104,16 @@ export class St3dCardCarousel  {
   }
 
   @Method()
+  async getPreviousIndex(): Promise<number> {
+    return this.currentSlide === 0 ? this.slidesToShow - 1 : this.currentSlide - 1;
+  }
+
+  @Method()
+  async getNextIndex(): Promise<number> {
+    return this.currentSlide === this.slidesToShow ? 0 : this.currentSlide + 1;
+  }
+
+  @Method()
   async isBeginning(): Promise<boolean> {
     return this.currentSlide === 0;
   }
@@ -111,6 +121,11 @@ export class St3dCardCarousel  {
   @Method()
   async isEnd(): Promise<boolean> {
     return this.currentSlide === this.slidesToShow;
+  }
+
+  @Method()
+  async length(): Promise<number> {
+    return this.items.length;
   }
 
   componentWillLoad() {

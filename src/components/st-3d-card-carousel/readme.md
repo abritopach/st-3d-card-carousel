@@ -53,6 +53,26 @@ Type: `Promise<number>`
 
 
 
+### `getNextIndex() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
+### `getPreviousIndex() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
 ### `isBeginning() => Promise<boolean>`
 
 
@@ -70,6 +90,16 @@ Type: `Promise<boolean>`
 #### Returns
 
 Type: `Promise<boolean>`
+
+
+
+### `length() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
 
 
 

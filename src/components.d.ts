@@ -19,10 +19,13 @@ export namespace Components {
     'cycle': () => Promise<boolean>;
     'distance': number;
     'getActiveIndex': () => Promise<number>;
+    'getNextIndex': () => Promise<number>;
+    'getPreviousIndex': () => Promise<number>;
     'initialSlide': number;
     'isBeginning': () => Promise<boolean>;
     'isEnd': () => Promise<boolean>;
     'keyboard': boolean;
+    'length': () => Promise<number>;
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;
     'select': (slideId: string | number) => Promise<CardItem>;
