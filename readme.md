@@ -156,6 +156,17 @@ Go to specific slide by number or keywords.
 Type: `Promise<CardItem>`
 
 
+
+### `slideReset() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
 ## Getting Started
 
 Before you go through this component, you should have at least a basic understanding of Stencil concepts.

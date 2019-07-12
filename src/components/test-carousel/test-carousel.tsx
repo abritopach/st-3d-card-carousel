@@ -112,6 +112,11 @@ export class TestCarousel {
     console.log(ev.detail);
   }
 
+  resetSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).slideReset();
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -133,6 +138,9 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.goToSlide.bind(this)}>Go to slide 4</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.resetSlide.bind(this)}>Reset slide to initial slide</button>
       </div>
     );
   }

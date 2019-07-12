@@ -133,6 +133,16 @@ Type: `Promise<CardItem>`
 
 
 
+### `slideReset() => Promise<CardItem>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem>`
+
+
+
 
 ## Dependencies
 

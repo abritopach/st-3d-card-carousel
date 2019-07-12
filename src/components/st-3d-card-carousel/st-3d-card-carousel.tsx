@@ -128,6 +128,13 @@ export class St3dCardCarousel  {
     return this.items.length;
   }
 
+  @Method()
+  async slideReset(): Promise<CardItem> {
+    this.selectSlide(this.initialSlide);
+    this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
+    return this.slides[this.initialSlide];
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 

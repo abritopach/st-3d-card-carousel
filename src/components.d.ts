@@ -29,6 +29,7 @@ export namespace Components {
     'next': () => Promise<CardItem>;
     'prev': () => Promise<CardItem>;
     'select': (slideId: string | number) => Promise<CardItem>;
+    'slideReset': () => Promise<CardItem>;
     'slideStyle': {};
     'slides': CardItem[];
     'slidesToShow': number;
