@@ -45,6 +45,10 @@ export class St3dCardCarousel  {
   @Prop() slideStyle = {
   };
   @Prop() axis: string = 'horizontal';
+  @Prop() allowSwipeSlide = {
+    prev: true,
+    next: true
+  }
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -284,33 +288,37 @@ export class St3dCardCarousel  {
     mc.on("swipeleft swiperight", (ev => {
       if (ev.type == "swipeleft") {
         this.swipeLeftSlide();
-        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
       }
       if (ev.type == "swiperight") {
         this.swipeRightSlide();
-        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
       }
     }).bind(this));
   }
 
   swipeLeftSlide() {
-    this.currentSlide += 1;
-    if (this.currentSlide > this.slidesToShow) {
-      this.currentSlide = 1;
+    if (this.allowSwipeSlide.next) {
+      this.currentSlide += 1;
+      if (this.currentSlide > this.slidesToShow) {
+        this.currentSlide = 1;
+      }
+      this.currentDeg = this.currentDeg - 60;
+      this.applyStyle();
+      this.currentItem.emit(this.currentSlide);
+      this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
     }
-    this.currentDeg = this.currentDeg - 60;
-    this.applyStyle();
-    this.currentItem.emit(this.currentSlide);
   }
 
   swipeRightSlide() {
-    this.currentSlide -= 1;
-    if (this.currentSlide === 0) {
-      this.currentSlide = this.slidesToShow;
+    if (this.allowSwipeSlide.prev) {
+      this.currentSlide -= 1;
+      if (this.currentSlide === 0) {
+        this.currentSlide = this.slidesToShow;
+      }
+      this.currentDeg = this.currentDeg + 60;
+      this.applyStyle();
+      this.currentItem.emit(this.currentSlide);
+      this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
     }
-    this.currentDeg = this.currentDeg + 60;
-    this.applyStyle();
-    this.currentItem.emit(this.currentSlide);
   }
 
   getSlideIndex(slideId: string) {

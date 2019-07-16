@@ -26,6 +26,7 @@ Stencil components are just Web Components, so they work in any major framework 
 
 | Property       | Attribute        | Description | Type                                                        | Default                                                               |
 | -------------- | ---------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| `allowSwipeSlide`        | --                         |             | `{ prev: boolean; next: boolean; }`     | `{     prev: true,     next: true   }`                                      |
 | `animationSelectedSlide` | `animation-selected-slide` |             | `boolean`                               | `true`
 | `autoloop`     | --               |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }` |
 | `axis`         | `axis`           |             | `string`                                                    | `'horizontal'`

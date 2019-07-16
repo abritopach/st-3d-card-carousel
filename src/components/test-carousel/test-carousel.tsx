@@ -25,6 +25,10 @@ export class TestCarousel {
   @State() animationSelectedSlide: boolean = true;
   @State() slideStyle = {
   };
+  @State() allowSwipeSlide = {
+    prev: true,
+    next: true
+  }
 
   @Element() htmlEl: HTMLElement;
 
@@ -126,7 +130,7 @@ export class TestCarousel {
         <p>Current slide: {this.activeItem} </p>
         <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
         slideStyle={this.slideStyle} animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance}
-        onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
+        allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
         <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
         <br></br>
         <br></br>

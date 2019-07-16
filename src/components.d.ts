@@ -12,6 +12,7 @@ import {
 
 export namespace Components {
   interface St3dCardCarousel {
+    'allowSwipeSlide': { prev: boolean; next: boolean; };
     'animationSelectedSlide': boolean;
     'autoloop': { enabled: boolean; seconds: number; direction: string; };
     'axis': string;
@@ -59,6 +60,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
+    'allowSwipeSlide'?: { prev: boolean; next: boolean; };
     'animationSelectedSlide'?: boolean;
     'autoloop'?: { enabled: boolean; seconds: number; direction: string; };
     'axis'?: string;
