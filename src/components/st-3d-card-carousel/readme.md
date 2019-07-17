@@ -34,6 +34,16 @@
 
 ## Methods
 
+### `appendSlide(slides: CardItem[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
 ### `cycle() => Promise<boolean>`
 
 

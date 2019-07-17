@@ -139,6 +139,17 @@ export class St3dCardCarousel  {
     return this.slides[this.initialSlide];
   }
 
+  @Method()
+  async appendSlide(slides: CardItem[]): Promise<CardItem[]> {
+    console.log(typeof slides);
+    this.items = [...this.items, ...slides];
+    return this.items;
+    /*
+    if (typeof slides === "string") {
+    }
+    */
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 

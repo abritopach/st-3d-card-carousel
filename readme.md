@@ -49,6 +49,17 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Component public API methods
 
+### `appendSlide(slides: CardItem[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
+
 ### `cycle() => Promise<boolean>`
 
 

@@ -14,6 +14,7 @@ export namespace Components {
   interface St3dCardCarousel {
     'allowSwipeSlide': { prev: boolean; next: boolean; };
     'animationSelectedSlide': boolean;
+    'appendSlide': (slides: CardItem[]) => Promise<CardItem[]>;
     'autoloop': { enabled: boolean; seconds: number; direction: string; };
     'axis': string;
     'controls': { enabled: boolean; position: string; text: string[]; };

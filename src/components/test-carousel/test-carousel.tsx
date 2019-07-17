@@ -60,11 +60,14 @@ export class TestCarousel {
   }
 
   getCurrentSlides() {
-    if (this.start === this.items.length) {
+    // console.log('this.items.length', this.items.length);
+    if (this.start >= this.items.length) {
         this.start = 0;
         this.end = 5;
     }
     this.slides = [];
+    // console.log('start', this.start);
+    // console.log('end', this.end);
     for (let i = this.start; i <= this.end; i++) {
         //this.slides.push(this.items[i]);
         this.slides = [
@@ -73,9 +76,16 @@ export class TestCarousel {
         ];
     }
 
+    // console.log('this.slides', this.slides);
     this.start = this.end + 1;
-    if ((this.start + this.end) < this.items.length) this.end = this.start + this.end;
-    else this.end = this.items.length - 1;
+    if (this.items.length - 1 - this.end > this.slidesToShow) {
+      this.end = this.end + this.slidesToShow;
+    }
+    else{
+      this.end = (this.items.length - 1 - this.end) + this.end;
+    }
+    // console.log('start1', this.start);
+    // console.log('end1', this.end);
   }
 
   handleClick() {
@@ -121,6 +131,46 @@ export class TestCarousel {
     (cardCarouselElement as any).slideReset();
   }
 
+  appendSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+
+    const newSlides = [  {
+      id: 16,
+      title: 'User 16',
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e67e22',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  },
+  {
+      id: 17,
+      title: 'User 17',
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e74c3c',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+  },
+];
+
+    this.items = [...this.items, ...newSlides];
+    console.log(this.items);
+    this.end = (this.items.length - 1 - this.end) + this.end;
+    console.log('this.end appendSlide', this.end);
+    (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
+      console.log("new slides: " + slides);
+    });
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -145,6 +195,9 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.resetSlide.bind(this)}>Reset slide to initial slide</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.appendSlide.bind(this)}>Append two slides</button>
       </div>
     );
   }
