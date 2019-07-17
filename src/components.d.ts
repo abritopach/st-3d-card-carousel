@@ -14,7 +14,7 @@ export namespace Components {
   interface St3dCardCarousel {
     'allowSwipeSlide': { prev: boolean; next: boolean; };
     'animationSelectedSlide': boolean;
-    'appendSlide': (slides: CardItem[]) => Promise<CardItem[]>;
+    'appendSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'autoloop': { enabled: boolean; seconds: number; direction: string; };
     'axis': string;
     'controls': { enabled: boolean; position: string; text: string[]; };
@@ -29,6 +29,7 @@ export namespace Components {
     'keyboard': boolean;
     'length': () => Promise<number>;
     'next': () => Promise<CardItem>;
+    'prependSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'prev': () => Promise<CardItem>;
     'select': (slideId: string | number) => Promise<CardItem>;
     'slideReset': () => Promise<CardItem>;

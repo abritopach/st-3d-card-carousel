@@ -60,14 +60,17 @@ export class TestCarousel {
   }
 
   getCurrentSlides() {
-    // console.log('this.items.length', this.items.length);
+    // console.log('getCurrentSlides', this.items.length);
     if (this.start >= this.items.length) {
         this.start = 0;
         this.end = 5;
     }
-    this.slides = [];
+
     // console.log('start', this.start);
     // console.log('end', this.end);
+
+
+    this.slides = [];
     for (let i = this.start; i <= this.end; i++) {
         //this.slides.push(this.items[i]);
         this.slides = [
@@ -75,8 +78,6 @@ export class TestCarousel {
           this.items[i]
         ];
     }
-
-    // console.log('this.slides', this.slides);
     this.start = this.end + 1;
     if (this.items.length - 1 - this.end > this.slidesToShow) {
       this.end = this.end + this.slidesToShow;
@@ -84,6 +85,8 @@ export class TestCarousel {
     else{
       this.end = (this.items.length - 1 - this.end) + this.end;
     }
+    if (this.start === this.items.length) this.end = this.start;
+
     // console.log('start1', this.start);
     // console.log('end1', this.end);
   }
@@ -134,7 +137,8 @@ export class TestCarousel {
   appendSlide() {
     const cardCarouselElement = document.querySelector('st-3D-card-carousel');
 
-    const newSlides = [  {
+    const newSlides = [
+    {
       id: 16,
       title: 'User 16',
       description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
@@ -146,27 +150,120 @@ export class TestCarousel {
       currentPlacement: 0,
       imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
       backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
-  },
-  {
-      id: 17,
-      title: 'User 17',
+    },
+    {
+        id: 17,
+        title: 'User 17',
+        description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+        subtitle: {
+          text: 'Spain',
+          icon: "fa fa-flag"
+        },
+        color: '#e74c3c',
+        currentPlacement: 0,
+        imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+        backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+    },
+    {
+      id: 18,
+      title: 'User 18',
       description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
       subtitle: {
         text: 'Spain',
         icon: "fa fa-flag"
       },
-      color: '#e74c3c',
+      color: '#e67e22',
       currentPlacement: 0,
       imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
-      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
-  },
-];
+      backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+    },
+    {
+        id: 19,
+        title: 'User 19',
+        description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+        subtitle: {
+          text: 'Spain',
+          icon: "fa fa-flag"
+        },
+        color: '#e74c3c',
+        currentPlacement: 0,
+        imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+        backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+    },
+    ];
 
-    this.items = [...this.items, ...newSlides];
+    /*
+    const newSlides = {
+      id: 18,
+      title: 'User 18',
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e67e22',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+    }
+    */
+
+
+    if (Array.isArray(newSlides)) {
+      this.items = [...this.items, ...newSlides];
+    }
+    else {
+      this.items.push(newSlides);
+    }
+
     console.log(this.items);
-    this.end = (this.items.length - 1 - this.end) + this.end;
-    console.log('this.end appendSlide', this.end);
     (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
+      console.log("new slides: " + slides);
+    });
+  }
+
+  prependSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+
+    const newSlides = [
+    {
+      id: 100,
+      title: 'User XXX',
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e67e22',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+    },
+    {
+        id: 101,
+        title: 'User YYY',
+        description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+        subtitle: {
+          text: 'Spain',
+          icon: "fa fa-flag"
+        },
+        color: '#e74c3c',
+        currentPlacement: 0,
+        imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+        backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+    }
+    ];
+
+
+    if (Array.isArray(newSlides)) {
+      this.items = [...newSlides, ...this.items];
+    }
+    else {
+      this.items.unshift(newSlides);
+    }
+
+    console.log(this.items);
+    (cardCarouselElement as any).prependSlide(newSlides).then((slides) => {
       console.log("new slides: " + slides);
     });
   }
@@ -178,6 +275,7 @@ export class TestCarousel {
         <h3>Stencil component for testing an experimental 3D card carousel Web Component.</h3>
         <p>Initial slide: {this.initialSlide} </p>
         <p>Current slide: {this.activeItem} </p>
+        <p>Slides length: {this.items.length} </p>
         <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
         slideStyle={this.slideStyle} animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance}
         allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
@@ -197,7 +295,10 @@ export class TestCarousel {
         <button class={buttonClass} onClick={this.resetSlide.bind(this)}>Reset slide to initial slide</button>
         <br></br>
         <br></br>
-        <button class={buttonClass} onClick={this.appendSlide.bind(this)}>Append two slides</button>
+        <button class={buttonClass} onClick={this.appendSlide.bind(this)}>Append four slides</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.prependSlide.bind(this)}>Prepend two slides</button>
       </div>
     );
   }

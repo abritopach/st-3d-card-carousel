@@ -140,14 +140,25 @@ export class St3dCardCarousel  {
   }
 
   @Method()
-  async appendSlide(slides: CardItem[]): Promise<CardItem[]> {
-    console.log(typeof slides);
-    this.items = [...this.items, ...slides];
-    return this.items;
-    /*
-    if (typeof slides === "string") {
+  async appendSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
+    if (Array.isArray(slides)) {
+      this.items = [...this.items, ...slides];
     }
-    */
+    else {
+      this.items.push(slides);
+    }
+    return this.items;
+  }
+
+  @Method()
+  async prependSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
+    if (Array.isArray(slides)) {
+      this.items = [...slides, ...this.items];
+    }
+    else {
+      this.items.unshift(slides);
+    }
+    return this.items;
   }
 
   componentWillLoad() {
@@ -189,9 +200,11 @@ export class St3dCardCarousel  {
     console.log('St3dCardCarousel::componentWillUpdate() | method called');
     this.checkDistance();
     this.checkAutoLoop();
+    console.log('componentWillUpdate this.slides', this.slides);
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = this.slides;
       let degree = 0;
+      this.items = this.items.slice(0, this.slidesToShow);
       this.items.map((item) => {
         item["currentPlacement"] = degree;
         degree = degree + 60;
