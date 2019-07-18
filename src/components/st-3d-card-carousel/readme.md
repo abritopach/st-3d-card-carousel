@@ -34,6 +34,16 @@
 
 ## Methods
 
+### `addSlide(index: number, slides: CardItem | CardItem[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
 ### `appendSlide(slides: CardItem | CardItem[]) => Promise<CardItem[]>`
 
 
@@ -141,6 +151,16 @@ Type: `Promise<CardItem[]>`
 #### Returns
 
 Type: `Promise<CardItem>`
+
+
+
+### `removeSlide(slideIndex: number | number[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
 
 
 

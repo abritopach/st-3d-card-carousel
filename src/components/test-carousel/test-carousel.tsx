@@ -222,7 +222,7 @@ export class TestCarousel {
    this.updateIndex();
 
     (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
-      console.log("new slides: " + slides);
+      console.log("appendSlide::new slides: " + slides);
     });
   }
 
@@ -272,7 +272,81 @@ export class TestCarousel {
 
     this.updateIndex();
     (cardCarouselElement as any).prependSlide(newSlides).then((slides) => {
-      console.log("new slides: " + slides);
+      console.log("prependSlide::new slides: " + slides);
+    });
+  }
+
+  addSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+
+    const newSlides = [
+    {
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e67e22',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+    },
+    {
+        id: Math.floor(Math.random() * 100),
+        title: 'User ' + Math.random().toString(36).substr(2, 4),
+        description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+        subtitle: {
+          text: 'Spain',
+          icon: "fa fa-flag"
+        },
+        color: '#e74c3c',
+        currentPlacement: 0,
+        imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+        backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+    }
+    ];
+
+
+    if (Array.isArray(newSlides)) {
+      this.items.splice(2, 0, ...newSlides)
+    }
+    else {
+      this.items.splice(2, 0, newSlides)
+    }
+
+    this.resetSlide();
+    this.resetIndex();
+    this.slides = [...this.items];
+
+    this.updateIndex();
+    (cardCarouselElement as any).addSlide(2, newSlides).then((slides) => {
+      console.log("addSlide::new slides: " + slides);
+    });
+  }
+
+  removeSlide() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+
+    /*
+    if (Array.isArray(newSlides)) {
+      this.items.splice(2, 0, ...newSlides)
+    }
+    else {
+      this.items.splice(2, 0, newSlides)
+    }
+    */
+
+   this.items.splice(1, 1);
+
+    this.resetSlide();
+    this.resetIndex();
+    this.slides = [...this.items];
+
+    this.updateIndex();
+    (cardCarouselElement as any).removeSlide(1).then((slides) => {
+      console.log("removeSlide::new slides: " + slides);
     });
   }
 
@@ -307,6 +381,12 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.prependSlide.bind(this)}>Prepend two slides</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.addSlide.bind(this)}>Add slides at index 2</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={this.removeSlide.bind(this)}>Remove slide at index 1</button>
       </div>
     );
   }

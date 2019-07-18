@@ -49,6 +49,49 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Component public API methods
 
+### `addSlide(index: number, slides: CardItem | CardItem[]) => Promise<CardItem[]>`
+
+```bash
+Add new slides to the required index. Slides could be new slide or array with such slides.
+
+const newSlides = [
+  {
+    id: Math.floor(Math.random() * 100),
+    title: 'User ' + Math.random().toString(36).substr(2, 4),
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#e67e22',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  },
+  {
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e74c3c',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+  }
+];
+
+.addSlide(newSlides);
+```
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
 ### `appendSlide(slides: CardItem[]) => Promise<CardItem[]>`
 
 ```bash
@@ -139,6 +182,10 @@ Type: `Promise<CardItem[]>`
 
 ### `cycle() => Promise<boolean>`
 
+```bash
+Restarts cycling through the slides from left to right.
+```
+
 
 
 #### Returns
@@ -148,6 +195,10 @@ Type: `Promise<boolean>`
 
 
 ### `getActiveIndex() => Promise<number>`
+
+```bash
+Get the index of the active slide.
+```
 
 
 
@@ -159,6 +210,10 @@ Type: `Promise<number>`
 
 ### `getNextIndex() => Promise<number>`
 
+```bash
+Get the index of the next slide.
+```
+
 
 
 #### Returns
@@ -168,6 +223,10 @@ Type: `Promise<number>`
 
 
 ### `getPreviousIndex() => Promise<number>`
+
+```bash
+Get the index of the previous slide.
+```
 
 
 
@@ -179,6 +238,10 @@ Type: `Promise<number>`
 
 ### `isBeginning() => Promise<boolean>`
 
+```bash
+Get whether or not the current slide is the first slide.
+```
+
 
 
 #### Returns
@@ -188,6 +251,10 @@ Type: `Promise<boolean>`
 
 
 ### `isEnd() => Promise<boolean>`
+
+```bash
+Get whether or not the current slide is the last slide.
+```
 
 
 
@@ -199,6 +266,10 @@ Type: `Promise<boolean>`
 
 ### `length() => Promise<number>`
 
+```bash
+Get the total number of slides.
+```
+
 
 
 #### Returns
@@ -208,6 +279,10 @@ Type: `Promise<number>`
 
 
 ### `next() => Promise<CardItem>`
+
+```bash
+Navigates to the next slide.
+```
 
 
 
@@ -265,6 +340,10 @@ Type: `Promise<CardItem[]>`
 
 ### `prev() => Promise<CardItem>`
 
+```bash
+Navigates to the previous slide.
+```
+
 
 
 #### Returns
@@ -294,6 +373,9 @@ Type: `Promise<CardItem>`
 
 ### `slideReset() => Promise<CardItem>`
 
+```bash
+Reset swiper position to initial slide.
+```
 
 
 #### Returns

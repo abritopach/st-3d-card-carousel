@@ -161,6 +161,27 @@ export class St3dCardCarousel  {
     return this.items;
   }
 
+  @Method()
+  async addSlide(index: number, slides: CardItem | CardItem[]) {
+    if (Array.isArray(slides)) {
+      this.items.splice(index, 0, ...slides);
+    }
+    else {
+      this.items.splice(index, 0, slides);
+    }
+    return this.items;
+  }
+
+  @Method()
+  async removeSlide(slideIndex: number | number[]): Promise<CardItem[]> {
+    if (Array.isArray(slideIndex)) {
+    }
+    else {
+      this.items.splice(slideIndex, 1);
+    }
+    return this.items;
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 

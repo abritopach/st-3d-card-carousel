@@ -12,6 +12,7 @@ import {
 
 export namespace Components {
   interface St3dCardCarousel {
+    'addSlide': (index: number, slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'allowSwipeSlide': { prev: boolean; next: boolean; };
     'animationSelectedSlide': boolean;
     'appendSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
@@ -31,6 +32,7 @@ export namespace Components {
     'next': () => Promise<CardItem>;
     'prependSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'prev': () => Promise<CardItem>;
+    'removeSlide': (slideIndex: number | number[]) => Promise<CardItem[]>;
     'select': (slideId: string | number) => Promise<CardItem>;
     'slideReset': () => Promise<CardItem>;
     'slideStyle': {};
