@@ -51,6 +51,83 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ### `appendSlide(slides: CardItem[]) => Promise<CardItem[]>`
 
+```bash
+Add new slide / slides to the end. Slides could be new slide or array with such slides.
+
+const newSlides = [
+  {
+    id: Math.floor(Math.random() * 100),
+    title: 'User ' + Math.random().toString(36).substr(2, 4),
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#e67e22',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  },
+  {
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e74c3c',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+  },
+  {
+    id: Math.floor(Math.random() * 100),
+    title: 'User ' + Math.random().toString(36).substr(2, 4),
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#e67e22',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  },
+  {
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e74c3c',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+  },
+];
+
+  const newSlide = {
+    id: 18,
+    title: 'User 18',
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#e67e22',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  }
+
+.appendSlide(newSlides);
+.appendSlide(newSlide);
+
+```
+
 
 
 #### Returns
@@ -141,6 +218,41 @@ Type: `Promise<CardItem>`
 
 
 ### `prependSlide(slides: CardItem | CardItem[]) => Promise<CardItem[]>`
+
+```bash
+Add new slide / slides to the beginning. Slides could be new slide or array with such slides.
+
+const newSlides = [
+  {
+    id: Math.floor(Math.random() * 100),
+    title: 'User ' + Math.random().toString(36).substr(2, 4),
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#e67e22',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
+  },
+  {
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
+      description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e74c3c',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
+  }
+];
+
+.prependSlide(newSlides);
+```
 
 
 
