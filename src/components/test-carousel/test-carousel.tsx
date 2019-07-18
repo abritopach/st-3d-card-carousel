@@ -59,25 +59,12 @@ export class TestCarousel {
     });
   }
 
-  getCurrentSlides() {
-    // console.log('getCurrentSlides', this.items.length);
-    if (this.start >= this.items.length) {
-        this.start = 0;
-        this.end = 5;
-    }
+  resetIndex() {
+    this.start = 0;
+    this.end = 5;
+  }
 
-    // console.log('start', this.start);
-    // console.log('end', this.end);
-
-
-    this.slides = [];
-    for (let i = this.start; i <= this.end; i++) {
-        //this.slides.push(this.items[i]);
-        this.slides = [
-          ...this.slides,
-          this.items[i]
-        ];
-    }
+  updateIndex() {
     this.start = this.end + 1;
     if (this.items.length - 1 - this.end > this.slidesToShow) {
       this.end = this.end + this.slidesToShow;
@@ -86,9 +73,21 @@ export class TestCarousel {
       this.end = (this.items.length - 1 - this.end) + this.end;
     }
     if (this.start === this.items.length) this.end = this.start;
+  }
 
-    // console.log('start1', this.start);
-    // console.log('end1', this.end);
+  getCurrentSlides() {
+    if (this.start >= this.items.length) {
+        this.resetIndex();
+    }
+    this.slides = [];
+    for (let i = this.start; i <= this.end; i++) {
+        //this.slides.push(this.items[i]);
+        this.slides = [
+          ...this.slides,
+          this.items[i]
+        ];
+    }
+    this.updateIndex();
   }
 
   handleClick() {
@@ -139,8 +138,8 @@ export class TestCarousel {
 
     const newSlides = [
     {
-      id: 16,
-      title: 'User 16',
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
       description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
       subtitle: {
         text: 'Spain',
@@ -152,8 +151,8 @@ export class TestCarousel {
       backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
     },
     {
-        id: 17,
-        title: 'User 17',
+        id: Math.floor(Math.random() * 100),
+        title: 'User ' + Math.random().toString(36).substr(2, 4),
         description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
         subtitle: {
           text: 'Spain',
@@ -165,8 +164,8 @@ export class TestCarousel {
         backgroundImgUrl: 'http://oxygennacdn1.oxygenna.com/wp-content/uploads/2017/01/header-image-6.jpg'
     },
     {
-      id: 18,
-      title: 'User 18',
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
       description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
       subtitle: {
         text: 'Spain',
@@ -178,8 +177,8 @@ export class TestCarousel {
       backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
     },
     {
-        id: 19,
-        title: 'User 19',
+        id: Math.floor(Math.random() * 100),
+        title: 'User ' + Math.random().toString(36).substr(2, 4),
         description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
         subtitle: {
           text: 'Spain',
@@ -216,7 +215,12 @@ export class TestCarousel {
       this.items.push(newSlides);
     }
 
-    console.log(this.items);
+    this.resetSlide();
+    this.resetIndex();
+    this.slides = [...this.items];
+
+   this.updateIndex();
+
     (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
       console.log("new slides: " + slides);
     });
@@ -227,8 +231,8 @@ export class TestCarousel {
 
     const newSlides = [
     {
-      id: 100,
-      title: 'User XXX',
+      id: Math.floor(Math.random() * 100),
+      title: 'User ' + Math.random().toString(36).substr(2, 4),
       description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
       subtitle: {
         text: 'Spain',
@@ -240,8 +244,8 @@ export class TestCarousel {
       backgroundImgUrl: 'https://ak2.picdn.net/shutterstock/videos/19300069/thumb/9.jpg'
     },
     {
-        id: 101,
-        title: 'User YYY',
+        id: Math.floor(Math.random() * 100),
+        title: 'User ' + Math.random().toString(36).substr(2, 4),
         description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
         subtitle: {
           text: 'Spain',
@@ -262,7 +266,11 @@ export class TestCarousel {
       this.items.unshift(newSlides);
     }
 
-    console.log(this.items);
+    this.resetSlide();
+    this.resetIndex();
+    this.slides = [...this.items];
+
+    this.updateIndex();
     (cardCarouselElement as any).prependSlide(newSlides).then((slides) => {
       console.log("new slides: " + slides);
     });

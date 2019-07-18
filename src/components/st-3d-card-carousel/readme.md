@@ -34,7 +34,7 @@
 
 ## Methods
 
-### `appendSlide(slides: CardItem[]) => Promise<CardItem[]>`
+### `appendSlide(slides: CardItem | CardItem[]) => Promise<CardItem[]>`
 
 
 
@@ -121,6 +121,16 @@ Type: `Promise<number>`
 #### Returns
 
 Type: `Promise<CardItem>`
+
+
+
+### `prependSlide(slides: CardItem | CardItem[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
 
 
 

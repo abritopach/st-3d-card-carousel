@@ -140,6 +140,17 @@ Type: `Promise<CardItem>`
 
 
 
+### `prependSlide(slides: CardItem | CardItem[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
+
 ### `prev() => Promise<CardItem>`
 
 
