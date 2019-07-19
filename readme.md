@@ -4,7 +4,7 @@
 
 [![Ask me anything](https://img.shields.io/badge/ask%20me-anything-1abc9c.svg)](https://github.com/abritopach) [![Version](https://img.shields.io/npm/v/st-three-dimensional-card-carousel.svg)](https://www.npmjs.com/package/st-three-dimensional-card-carousel) [![Downloads](https://img.shields.io/npm/dt/st-three-dimensional-card-carousel.svg)](https://www.npmjs.com/package/st-three-dimensional-card-carousel)
 
-Sample project that shows an experimental 3D card carousel Web Component built with Stencil.
+Sample project that shows an experimental 3D card carousel Web Component built with Stencil. A framework-agnostic web component that works in Ionic, Angular, React, Vue,...
 
 Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
 

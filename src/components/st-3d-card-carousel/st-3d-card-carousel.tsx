@@ -175,6 +175,12 @@ export class St3dCardCarousel  {
   @Method()
   async removeSlide(slideIndex: number | number[]): Promise<CardItem[]> {
     if (Array.isArray(slideIndex)) {
+      let index = slideIndex[0];
+      slideIndex.map((si, i) => {
+        console.log('si', si, 'index', index);
+        this.items.splice(index, 1);
+        index = slideIndex[i + 1] - 1;
+      });
     }
     else {
       this.items.splice(slideIndex, 1);

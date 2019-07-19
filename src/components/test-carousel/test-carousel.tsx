@@ -326,28 +326,30 @@ export class TestCarousel {
     });
   }
 
-  removeSlide() {
+  removeSlide(indexSlides) {
     const cardCarouselElement = document.querySelector('st-3D-card-carousel');
 
-    /*
-    if (Array.isArray(newSlides)) {
-      this.items.splice(2, 0, ...newSlides)
+    if (Array.isArray(indexSlides)) {
+      let index = indexSlides[0];
+      indexSlides.map((si, i) => {
+        console.log('si', si, 'index', index);
+        this.items.splice(index, 1);
+        index = indexSlides[i + 1] - 1;
+      });
     }
     else {
-      this.items.splice(2, 0, newSlides)
+      this.items.splice(indexSlides, 1);
     }
-    */
-
-   this.items.splice(1, 1);
 
     this.resetSlide();
     this.resetIndex();
     this.slides = [...this.items];
 
     this.updateIndex();
-    (cardCarouselElement as any).removeSlide(1).then((slides) => {
+    (cardCarouselElement as any).removeSlide(indexSlides).then((slides) => {
       console.log("removeSlide::new slides: " + slides);
     });
+
   }
 
   render() {
@@ -378,15 +380,11 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.appendSlide.bind(this)}>Append four slides</button>
-        <br></br>
-        <br></br>
         <button class={buttonClass} onClick={this.prependSlide.bind(this)}>Prepend two slides</button>
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.addSlide.bind(this)}>Add slides at index 2</button>
-        <br></br>
-        <br></br>
-        <button class={buttonClass} onClick={this.removeSlide.bind(this)}>Remove slide at index 1</button>
+        <button class={buttonClass} onClick={() => this.removeSlide(1)}>Remove slide at index 1</button>
       </div>
     );
   }
