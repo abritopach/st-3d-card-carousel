@@ -40,12 +40,14 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Component events
 
-| Event            | Description | Type               |
-| ---------------- | ----------- | ------------------ |
-| `currentItem`    |             | `CustomEvent<any>` |
-| `selectedItem`   |             | `CustomEvent<any>` |
-| `slideChange`    |             | `CustomEvent<any>` |
-| `slideDoubleTap` |             | `CustomEvent<any>` |
+| Event                  | Description | Type               |
+| ---------------------- | ----------- | ------------------ |
+| `currentItem`          |             | `CustomEvent<any>` |
+| `reachBeginningSlides` |             | `CustomEvent<any>` |
+| `reachEndSlides`       |             | `CustomEvent<any>` |
+| `selectedItem`         |             | `CustomEvent<any>` |
+| `slideChange`          |             | `CustomEvent<any>` |
+| `slideDoubleTap`       |             | `CustomEvent<any>` |
 
 ## Component public API methods
 

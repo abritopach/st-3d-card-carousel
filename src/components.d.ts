@@ -73,6 +73,8 @@ declare namespace LocalJSX {
     'initialSlide'?: number;
     'keyboard'?: boolean;
     'onCurrentItem'?: (event: CustomEvent<any>) => void;
+    'onReachBeginningSlides'?: (event: CustomEvent<any>) => void;
+    'onReachEndSlides'?: (event: CustomEvent<any>) => void;
     'onSelectedItem'?: (event: CustomEvent<any>) => void;
     'onSlideChange'?: (event: CustomEvent<any>) => void;
     'onSlideDoubleTap'?: (event: CustomEvent<any>) => void;

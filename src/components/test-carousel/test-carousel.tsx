@@ -352,6 +352,14 @@ export class TestCarousel {
 
   }
 
+  reachEndSlides(ev) {
+    console.log(ev.detail);
+  }
+
+  reachBeginningSlides(ev) {
+    console.log(ev.detail);
+  }
+
   render() {
     let buttonClass = 'button';
     return (
@@ -362,7 +370,8 @@ export class TestCarousel {
         <p>Slides length: {this.items.length} </p>
         <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
         slideStyle={this.slideStyle} animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance}
-        allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}></st-3D-card-carousel>
+        allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}
+        onReachEndSlides={ev => this.reachEndSlides(ev)} onReachBeginningSlides={ev => this.reachBeginningSlides(ev)}></st-3D-card-carousel>
         <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
         <br></br>
         <br></br>

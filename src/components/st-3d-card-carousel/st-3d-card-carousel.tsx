@@ -53,6 +53,8 @@ export class St3dCardCarousel  {
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
   @Event() slideDoubleTap: EventEmitter;
+  @Event() reachEndSlides: EventEmitter;
+  @Event() reachBeginningSlides: EventEmitter;
   /*
   @Listen('selectedItem')
   selectedItemHandler(event: CustomEvent) {
@@ -356,6 +358,7 @@ export class St3dCardCarousel  {
       this.applyStyle();
       this.currentItem.emit(this.currentSlide);
       this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
+      this.isFirstOrLastSlide();
     }
   }
 
@@ -369,6 +372,7 @@ export class St3dCardCarousel  {
       this.applyStyle();
       this.currentItem.emit(this.currentSlide);
       this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
+      this.isFirstOrLastSlide();
     }
   }
 
@@ -405,6 +409,7 @@ export class St3dCardCarousel  {
       this.applyStyle();
       this.currentSlide = slideId;
       this.currentItem.emit(this.currentSlide);
+      this.isFirstOrLastSlide();
     }
   }
 
@@ -432,6 +437,16 @@ export class St3dCardCarousel  {
         <i class="icon icon-arrow icon-arrow-right" onClick={ () => this.onHandleClickArrowRight()}></i>
       </div>
     );
+  }
+
+  isFirstOrLastSlide() {
+    // console.log('isFirstOrLastSlide', this.currentSlide);
+    if (this.currentSlide === 1) {
+      this.reachBeginningSlides.emit({message: 'reach beginning slides', currentSlide: this.currentSlide});
+    }
+    if (this.currentSlide === 6) {
+      this.reachEndSlides.emit({message: 'reach end slides', currentSlide: this.currentSlide});
+    }
   }
 
   render() {
