@@ -330,11 +330,9 @@ export class TestCarousel {
     const cardCarouselElement = document.querySelector('st-3D-card-carousel');
 
     if (Array.isArray(indexSlides)) {
-      let index = indexSlides[0];
-      indexSlides.map((si, i) => {
-        console.log('si', si, 'index', index);
-        this.items.splice(index, 1);
-        index = indexSlides[i + 1] - 1;
+      const copyItems = this.items;
+      indexSlides.map(si => {
+        this.items = this.items.filter(item => item !== copyItems[si]);
       });
     }
     else {
@@ -393,7 +391,7 @@ export class TestCarousel {
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.addSlide.bind(this)}>Add slides at index 2</button>
-        <button class={buttonClass} onClick={() => this.removeSlide(1)}>Remove slide at index 1</button>
+        <button class={buttonClass} onClick={() => this.removeSlide([0, 4, 5])}>Remove slides at index [0, 4, 5]</button>
       </div>
     );
   }

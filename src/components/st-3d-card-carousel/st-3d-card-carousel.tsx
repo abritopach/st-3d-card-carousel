@@ -106,7 +106,7 @@ export class St3dCardCarousel  {
 
   @Method()
   async getActiveIndex(): Promise<number> {
-    return this.currentSlide;
+    return this.currentSlide - 1;
   }
 
   @Method()
@@ -177,11 +177,9 @@ export class St3dCardCarousel  {
   @Method()
   async removeSlide(slideIndex: number | number[]): Promise<CardItem[]> {
     if (Array.isArray(slideIndex)) {
-      let index = slideIndex[0];
-      slideIndex.map((si, i) => {
-        console.log('si', si, 'index', index);
-        this.items.splice(index, 1);
-        index = slideIndex[i + 1] - 1;
+      const copyItems = this.items;
+      slideIndex.map(si => {
+        this.items = this.items.filter(item => item !== copyItems[si]);
       });
     }
     else {
@@ -440,13 +438,14 @@ export class St3dCardCarousel  {
   }
 
   isFirstOrLastSlide() {
-    // console.log('isFirstOrLastSlide', this.currentSlide);
-    if (this.currentSlide === 1) {
-      this.reachBeginningSlides.emit({message: 'reach beginning slides', currentSlide: this.currentSlide});
-    }
-    if (this.currentSlide === 6) {
-      this.reachEndSlides.emit({message: 'reach end slides', currentSlide: this.currentSlide});
-    }
+    this.getActiveIndex().then((activeIndex) => {
+      if (activeIndex === 0) {
+        this.reachBeginningSlides.emit({message: 'reach beginning slides', currentSlide: this.currentSlide, activeIndex: activeIndex});
+      }
+      if (activeIndex === 5) {
+        this.reachEndSlides.emit({message: 'reach end slides', currentSlide: this.currentSlide, activeIndex: activeIndex});
+      }
+    });
   }
 
   render() {
