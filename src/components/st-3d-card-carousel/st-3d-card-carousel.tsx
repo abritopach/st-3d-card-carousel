@@ -11,7 +11,10 @@ import { CardItemsService } from '../../services/fake-card-items.service';
 })
 export class St3dCardCarousel  {
 
+  private start: number = 0;
+  private end: number = 5;
   private items: CardItem[] = [];
+  private copySlides: CardItem[] = [];
   private tz: number = 250;
   private currentDeg: number = 0;
   private currentSlide: number = 1;
@@ -143,59 +146,90 @@ export class St3dCardCarousel  {
 
   @Method()
   async appendSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
+
+    this.slideReset();
+    this.resetIndex();
+
     if (Array.isArray(slides)) {
-      this.items = [...this.items, ...slides];
+      this.copySlides = [...this.copySlides, ...slides];
     }
     else {
-      this.items.push(slides);
+      this.copySlides.push(slides);
     }
-    return this.items;
+
+    this.updateIndex();
+    return this.copySlides;
   }
 
   @Method()
   async prependSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
+
+    this.slideReset();
+    this.resetIndex();
+
     if (Array.isArray(slides)) {
-      this.items = [...slides, ...this.items];
+      this.copySlides = [...slides, ...this.copySlides,];
     }
     else {
-      this.items.unshift(slides);
+      this.copySlides.unshift(slides);
     }
-    return this.items;
+
+    this.updateIndex();
+    return this.copySlides;
   }
 
   @Method()
   async addSlide(index: number, slides: CardItem | CardItem[]) {
+
+    this.slideReset();
+    this.resetIndex();
+
     if (Array.isArray(slides)) {
-      this.items.splice(index, 0, ...slides);
+      this.copySlides.splice(index, 0, ...slides);
     }
     else {
-      this.items.splice(index, 0, slides);
+      this.copySlides.splice(index, 0, slides);
     }
-    return this.items;
+    this.updateIndex();
+    return this.copySlides;
   }
 
   @Method()
   async removeSlide(slideIndex: number | number[]): Promise<CardItem[]> {
+
+    this.slideReset();
+    this.resetIndex();
+
     if (Array.isArray(slideIndex)) {
-      const copyItems = this.items;
+      const copyItems = this.copySlides;
       slideIndex.map(si => {
-        this.items = this.items.filter(item => item !== copyItems[si]);
+        this.copySlides = this.copySlides.filter(item => item !== copyItems[si]);
       });
     }
     else {
-      this.items.splice(slideIndex, 1);
+      this.copySlides.splice(slideIndex, 1);
     }
-    return this.items;
+    this.updateIndex();
+    return this.copySlides;
+  }
+
+  @Method()
+  async loadMore(): Promise<CardItem[]> {
+    return this.getCurrentSlides();
   }
 
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 
     if (this.slides.length === 0) {
-      this.items = CardItemsService.getAll();
+      this.items = [...this.items, ...CardItemsService.getAll()];
+      this.copySlides = [...this.items];
     }
     else {
-      this.items = this.slides;
+      // this.items = this.slides;
+      this.copySlides = [...this.slides];
+      this.items = [...this.getCurrentSlides()];
+      // this.copySlides = this.items;
     }
 
     this.checkDistance();
@@ -206,6 +240,7 @@ export class St3dCardCarousel  {
         item.currentPlacement = degree;
         degree = degree + 60;
     });
+
   }
 
   componentDidLoad() {
@@ -224,12 +259,15 @@ export class St3dCardCarousel  {
   }
 
   componentWillUpdate() {
-    console.log('St3dCardCarousel::componentWillUpdate() | method called');
+    // console.log('St3dCardCarousel::componentWillUpdate() | method called');
+  }
+
+  componentDidUpdate() {
     this.checkDistance();
     this.checkAutoLoop();
-    console.log('componentWillUpdate this.slides', this.slides);
     if ((this.slides != null) && (this.slides.length != 0)) {
-      this.items = this.slides;
+      this.items = [...this.slides];
+      this.slides = [];
       let degree = 0;
       this.items = this.items.slice(0, this.slidesToShow);
       this.items.map((item) => {
@@ -300,7 +338,7 @@ export class St3dCardCarousel  {
   }
 
   checkAutoLoop() {
-    if (this.autoloop.enabled) {
+    if (this.autoloop.enabled && this.autoloopTask === null) {
       this.autoloopTask = setInterval(() => {
         if (this.autoloop.direction === 'left') {
           this.swipeLeftSlide();
@@ -354,9 +392,11 @@ export class St3dCardCarousel  {
       }
       this.currentDeg = this.currentDeg - 60;
       this.applyStyle();
-      this.currentItem.emit(this.currentSlide);
-      this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
-      this.isFirstOrLastSlide();
+      if (!this.autoloop.enabled) {
+        this.currentItem.emit(this.currentSlide);
+        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
+        this.isFirstOrLastSlide();
+      }
     }
   }
 
@@ -368,9 +408,11 @@ export class St3dCardCarousel  {
       }
       this.currentDeg = this.currentDeg + 60;
       this.applyStyle();
-      this.currentItem.emit(this.currentSlide);
-      this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
-      this.isFirstOrLastSlide();
+      if (!this.autoloop.enabled) {
+        this.currentItem.emit(this.currentSlide);
+        this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
+        this.isFirstOrLastSlide();
+      }
     }
   }
 
@@ -446,6 +488,37 @@ export class St3dCardCarousel  {
         this.reachEndSlides.emit({message: 'reach end slides', currentSlide: this.currentSlide, activeIndex: activeIndex});
       }
     });
+  }
+
+  resetIndex() {
+    this.start = 0;
+    this.end = 5;
+  }
+
+  updateIndex() {
+    this.start = this.end + 1;
+    if (this.copySlides.length - 1 - this.end > this.slidesToShow) {
+      this.end = this.end + this.slidesToShow;
+    }
+    else{
+      this.end = (this.copySlides.length - 1 - this.end) + this.end;
+    }
+    if (this.start === this.copySlides.length) this.end = this.start;
+  }
+
+  getCurrentSlides() {
+    if (this.start >= this.copySlides.length) {
+      this.resetIndex();
+    }
+    this.slides = [];
+    for (let i = this.start; i <= this.end; i++) {
+        this.slides = [
+          ...this.slides,
+          this.copySlides[i]
+        ];
+    }
+    this.updateIndex();
+    return this.slides;
   }
 
   render() {

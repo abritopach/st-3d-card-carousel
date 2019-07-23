@@ -280,6 +280,16 @@ Type: `Promise<number>`
 
 
 
+### `loadMore() => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
 ### `next() => Promise<CardItem>`
 
 ```bash

@@ -8,8 +8,6 @@ import { CardItemsService } from '../../services/fake-card-items.service';
 })
 export class TestCarousel {
 
-  private start: number = 0;
-  private end: number = 5;
   private items: any;
   @State() initialSlide: number = 3;
   @State() activeItem: number = 1;
@@ -34,7 +32,7 @@ export class TestCarousel {
 
   componentWillLoad() {
     this.items = CardItemsService.getAll();
-    this.getCurrentSlides();
+    this.slides = CardItemsService.getAll();
   }
 
   componentDidLoad() {
@@ -59,39 +57,11 @@ export class TestCarousel {
     });
   }
 
-  resetIndex() {
-    this.start = 0;
-    this.end = 5;
-  }
-
-  updateIndex() {
-    this.start = this.end + 1;
-    if (this.items.length - 1 - this.end > this.slidesToShow) {
-      this.end = this.end + this.slidesToShow;
-    }
-    else{
-      this.end = (this.items.length - 1 - this.end) + this.end;
-    }
-    if (this.start === this.items.length) this.end = this.start;
-  }
-
-  getCurrentSlides() {
-    if (this.start >= this.items.length) {
-        this.resetIndex();
-    }
-    this.slides = [];
-    for (let i = this.start; i <= this.end; i++) {
-        //this.slides.push(this.items[i]);
-        this.slides = [
-          ...this.slides,
-          this.items[i]
-        ];
-    }
-    this.updateIndex();
-  }
-
   handleClick() {
-    this.getCurrentSlides();
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).loadMore().then((newSlides) => {
+      console.log("loadMore newSlides: ", newSlides);
+    });
   }
 
   handleClickAutoLoop() {
@@ -215,14 +185,9 @@ export class TestCarousel {
       this.items.push(newSlides);
     }
 
-    this.resetSlide();
-    this.resetIndex();
     this.slides = [...this.items];
-
-   this.updateIndex();
-
     (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
-      console.log("appendSlide::new slides: " + slides);
+      console.log("appendSlide::new slides: ", slides);
     });
   }
 
@@ -266,11 +231,8 @@ export class TestCarousel {
       this.items.unshift(newSlides);
     }
 
-    this.resetSlide();
-    this.resetIndex();
     this.slides = [...this.items];
 
-    this.updateIndex();
     (cardCarouselElement as any).prependSlide(newSlides).then((slides) => {
       console.log("prependSlide::new slides: " + slides);
     });
@@ -316,11 +278,8 @@ export class TestCarousel {
       this.items.splice(2, 0, newSlides)
     }
 
-    this.resetSlide();
-    this.resetIndex();
     this.slides = [...this.items];
 
-    this.updateIndex();
     (cardCarouselElement as any).addSlide(2, newSlides).then((slides) => {
       console.log("addSlide::new slides: " + slides);
     });
@@ -339,11 +298,9 @@ export class TestCarousel {
       this.items.splice(indexSlides, 1);
     }
 
-    this.resetSlide();
-    this.resetIndex();
+
     this.slides = [...this.items];
 
-    this.updateIndex();
     (cardCarouselElement as any).removeSlide(indexSlides).then((slides) => {
       console.log("removeSlide::new slides: " + slides);
     });

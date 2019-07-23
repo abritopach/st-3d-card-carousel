@@ -29,6 +29,7 @@ export namespace Components {
     'isEnd': () => Promise<boolean>;
     'keyboard': boolean;
     'length': () => Promise<number>;
+    'loadMore': () => Promise<CardItem[]>;
     'next': () => Promise<CardItem>;
     'prependSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'prev': () => Promise<CardItem>;
