@@ -16,7 +16,7 @@ export namespace Components {
     'allowSwipeSlide': { prev: boolean; next: boolean; };
     'animationSelectedSlide': boolean;
     'appendSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
-    'autoloop': { enabled: boolean; seconds: number; direction: string; };
+    'autoloop': { enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; };
     'axis': string;
     'controls': { enabled: boolean; position: string; text: string[]; };
     'cycle': () => Promise<boolean>;
@@ -30,6 +30,7 @@ export namespace Components {
     'keyboard': boolean;
     'length': () => Promise<number>;
     'loadMore': () => Promise<CardItem[]>;
+    'moreSlides': () => Promise<boolean>;
     'next': () => Promise<CardItem>;
     'prependSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'prev': () => Promise<CardItem>;
@@ -67,7 +68,7 @@ declare namespace LocalJSX {
   interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
     'allowSwipeSlide'?: { prev: boolean; next: boolean; };
     'animationSelectedSlide'?: boolean;
-    'autoloop'?: { enabled: boolean; seconds: number; direction: string; };
+    'autoloop'?: { enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; };
     'axis'?: string;
     'controls'?: { enabled: boolean; position: string; text: string[]; };
     'distance'?: number;

@@ -25,7 +25,8 @@ export class St3dCardCarousel  {
   @Prop() autoloop = {
     enabled: false,
     seconds: 2000,
-    direction: 'right'
+    direction: 'right',
+    stopOnLastSlide: false
   };
   @Prop() initialSlide: number = 1;
   @Prop() slidesToShow: number = 6;
@@ -222,6 +223,11 @@ export class St3dCardCarousel  {
     return this.getCurrentSlides();
   }
 
+  @Method()
+  async moreSlides(): Promise<boolean> {
+    return this.copySlides.length > this.slidesToShow  ? true : false;
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 
@@ -397,10 +403,10 @@ export class St3dCardCarousel  {
       }
       this.currentDeg = this.currentDeg - 60;
       this.applyStyle();
+      this.isFirstOrLastSlide();
       if (!this.autoloop.enabled) {
         this.currentItem.emit(this.currentSlide);
         this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
-        this.isFirstOrLastSlide();
       }
     }
   }
@@ -413,10 +419,10 @@ export class St3dCardCarousel  {
       }
       this.currentDeg = this.currentDeg + 60;
       this.applyStyle();
+      this.isFirstOrLastSlide();
       if (!this.autoloop.enabled) {
         this.currentItem.emit(this.currentSlide);
         this.slideChange.emit({message: 'slide changed', currentSlide: this.currentSlide});
-        this.isFirstOrLastSlide();
       }
     }
   }
@@ -491,6 +497,10 @@ export class St3dCardCarousel  {
       }
       if (activeIndex === 5) {
         this.reachEndSlides.emit({message: 'reach end slides', currentSlide: this.currentSlide, activeIndex: activeIndex});
+        if (this.autoloop.enabled && this.autoloop.stopOnLastSlide) {
+          clearInterval(this.autoloopTask);
+          this.autoloopTask = null;
+        }
       }
     });
   }

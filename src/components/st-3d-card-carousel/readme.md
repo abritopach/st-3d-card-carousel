@@ -7,19 +7,19 @@
 
 ## Properties
 
-| Property                 | Attribute                  | Description | Type                                                        | Default                                                                     |
-| ------------------------ | -------------------------- | ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `allowSwipeSlide`        | --                         |             | `{ prev: boolean; next: boolean; }`                         | `{     prev: true,     next: true   }`                                      |
-| `animationSelectedSlide` | `animation-selected-slide` |             | `boolean`                                                   | `true`                                                                      |
-| `autoloop`               | --                         |             | `{ enabled: boolean; seconds: number; direction: string; }` | `{     enabled: false,     seconds: 2000,     direction: 'right'   }`       |
-| `axis`                   | `axis`                     |             | `string`                                                    | `'horizontal'`                                                              |
-| `controls`               | --                         |             | `{ enabled: boolean; position: string; text: string[]; }`   | `{     enabled: false,     position: 'top',     text: ['prev', 'next']   }` |
-| `distance`               | `distance`                 |             | `number`                                                    | `undefined`                                                                 |
-| `initialSlide`           | `initial-slide`            |             | `number`                                                    | `1`                                                                         |
-| `keyboard`               | `keyboard`                 |             | `boolean`                                                   | `false`                                                                     |
-| `slideStyle`             | --                         |             | `{}`                                                        | `{   }`                                                                     |
-| `slides`                 | --                         |             | `CardItem[]`                                                | `[]`                                                                        |
-| `slidesToShow`           | `slides-to-show`           |             | `number`                                                    | `6`                                                                         |
+| Property                 | Attribute                  | Description | Type                                                                                  | Default                                                                                           |
+| ------------------------ | -------------------------- | ----------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `allowSwipeSlide`        | --                         |             | `{ prev: boolean; next: boolean; }`                                                   | `{     prev: true,     next: true   }`                                                            |
+| `animationSelectedSlide` | `animation-selected-slide` |             | `boolean`                                                                             | `true`                                                                                            |
+| `autoloop`               | --                         |             | `{ enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; }` | `{     enabled: false,     seconds: 2000,     direction: 'right',     stopOnLastSlide: false   }` |
+| `axis`                   | `axis`                     |             | `string`                                                                              | `'horizontal'`                                                                                    |
+| `controls`               | --                         |             | `{ enabled: boolean; position: string; text: string[]; }`                             | `{     enabled: false,     position: 'top',     text: ['prev', 'next']   }`                       |
+| `distance`               | `distance`                 |             | `number`                                                                              | `undefined`                                                                                       |
+| `initialSlide`           | `initial-slide`            |             | `number`                                                                              | `1`                                                                                               |
+| `keyboard`               | `keyboard`                 |             | `boolean`                                                                             | `false`                                                                                           |
+| `slideStyle`             | --                         |             | `{}`                                                                                  | `{   }`                                                                                           |
+| `slides`                 | --                         |             | `CardItem[]`                                                                          | `[]`                                                                                              |
+| `slidesToShow`           | `slides-to-show`           |             | `number`                                                                              | `6`                                                                                               |
 
 
 ## Events
@@ -133,6 +133,16 @@ Type: `Promise<number>`
 #### Returns
 
 Type: `Promise<CardItem[]>`
+
+
+
+### `moreSlides() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
 
 
 

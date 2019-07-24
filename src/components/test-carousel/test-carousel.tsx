@@ -15,7 +15,8 @@ export class TestCarousel {
   @State() autoloop = {
     enabled: false,
     seconds: 2000,
-    direction: 'right'
+    direction: 'right',
+    stopOnLastSlide: false
   };
   @State() slidesToShow: number = 6;
   @State() keyboard: boolean = false;
@@ -27,6 +28,7 @@ export class TestCarousel {
     prev: true,
     next: true
   }
+  @State() moreSlds = false;
 
   @Element() htmlEl: HTMLElement;
 
@@ -55,6 +57,7 @@ export class TestCarousel {
     (cardCarouselElement as any).length().then((length) => {
       console.log("Slides length: " + length);
     });
+    this.moreSlides();
   }
 
   handleClick() {
@@ -99,6 +102,13 @@ export class TestCarousel {
   resetSlide() {
     const cardCarouselElement = document.querySelector('st-3D-card-carousel');
     (cardCarouselElement as any).slideReset();
+  }
+
+  moreSlides() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).moreSlides().then((moreSlides) => {
+      this.moreSlds = moreSlides;
+    });
   }
 
   appendSlide() {
@@ -317,7 +327,10 @@ export class TestCarousel {
         slideStyle={this.slideStyle} animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance}
         allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}
         onReachEndSlides={ev => this.reachEndSlides(ev)} onReachBeginningSlides={ev => this.reachBeginningSlides(ev)}></st-3D-card-carousel>
-        <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
+        { this.moreSlds
+          ? <button class={buttonClass} onClick={this.handleClick.bind(this)}>Load more</button>
+          : null
+        }
         <br></br>
         <br></br>
         <button class={buttonClass} onClick={this.handleClickAutoLoop.bind(this)}>AutoLoop</button>

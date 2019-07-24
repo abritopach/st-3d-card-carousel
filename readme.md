@@ -22,6 +22,79 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ![Component](readme_resources/component_preview.gif "Component")
 
+## Slides model
+
+Slides: CardItem[] interface.
+
+```bash
+
+INTERFACE
+
+export interface CardItem {
+    id: number;
+    title: string;
+    description?: string;
+    subtitle?: {
+        text: string;
+        icon?: string;
+    };
+    color: string;
+    imgUrl: string;
+    backgroundImgUrl?: string;
+    footer?: {
+        icons: {
+            leftIcon: string;
+            rightIcon: string;
+        },
+        values: {
+            leftValue: number;
+            rightValue: number;
+        }
+    },
+    currentPlacement: number;
+}
+
+EXAMPLE SLIDES
+
+slides = [{
+    id: 1,
+    title: 'User 1',
+    description: 'Wait a minute. Wait a minute, Doc. Uhhh...',
+    subtitle: {
+      text: 'Spain',
+      icon: "fa fa-flag"
+    },
+    color: '#1abc9c',
+    currentPlacement: 0,
+    imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+    backgroundImgUrl: 'http://oxygennacdn3.oxygenna.com/wp-content/uploads/2015/11/18.jpg',
+    footer: {
+      icons: {
+          leftIcon: "fa fa-users",
+          rightIcon: "fa fa-comments"
+      },
+      values: {
+          leftValue:12,
+          rightValue: 4
+      }
+    }
+  },
+  {
+      id: 2,
+      title: 'User 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat molestie euismod. Etiam tincidunt luctus diam non ullamcorper. Maecenas eros est, iaculis hendrerit imperdiet nec, rhoncus in turpis. Vestibulum elementum mauris vitae nibh sagittis, et fermentum nunc aliquet. Donec sed ex sollicitudin, tristique sapien non, lacinia enim.',
+      subtitle: {
+        text: 'Spain',
+        icon: "fa fa-flag"
+      },
+      color: '#e67e22',
+      currentPlacement: 0,
+      imgUrl: 'https://www.resa.es/wp-content/uploads/2015/07/icon-user-default.png',
+      backgroundImgUrl: 'https://s-media-cache-ak0.pinimg.com/originals/d2/7b/4f/d27b4fa995194a0c77b8871a326a7c0b.jpg'
+  }];
+
+```
+
 ## Component properties
 
 | Property       | Attribute        | Description | Type                                                        | Default                                                               |
@@ -287,6 +360,16 @@ Type: `Promise<number>`
 #### Returns
 
 Type: `Promise<CardItem[]>`
+
+
+
+### `moreSlides() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
 
 
 
