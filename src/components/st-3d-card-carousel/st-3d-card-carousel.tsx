@@ -147,8 +147,8 @@ export class St3dCardCarousel  {
   @Method()
   async appendSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
 
-    this.slideReset();
     this.resetIndex();
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
 
     if (Array.isArray(slides)) {
       this.copySlides = [...this.copySlides, ...slides];
@@ -164,7 +164,6 @@ export class St3dCardCarousel  {
   @Method()
   async prependSlide(slides: CardItem | CardItem[]): Promise<CardItem[]> {
 
-    this.slideReset();
     this.resetIndex();
 
     if (Array.isArray(slides)) {
@@ -174,6 +173,7 @@ export class St3dCardCarousel  {
       this.copySlides.unshift(slides);
     }
 
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
     this.updateIndex();
     return this.copySlides;
   }
@@ -181,7 +181,6 @@ export class St3dCardCarousel  {
   @Method()
   async addSlide(index: number, slides: CardItem | CardItem[]) {
 
-    this.slideReset();
     this.resetIndex();
 
     if (Array.isArray(slides)) {
@@ -190,6 +189,9 @@ export class St3dCardCarousel  {
     else {
       this.copySlides.splice(index, 0, slides);
     }
+
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
+
     this.updateIndex();
     return this.copySlides;
   }
@@ -197,7 +199,6 @@ export class St3dCardCarousel  {
   @Method()
   async removeSlide(slideIndex: number | number[]): Promise<CardItem[]> {
 
-    this.slideReset();
     this.resetIndex();
 
     if (Array.isArray(slideIndex)) {
@@ -209,6 +210,9 @@ export class St3dCardCarousel  {
     else {
       this.copySlides.splice(slideIndex, 1);
     }
+
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
+
     this.updateIndex();
     return this.copySlides;
   }
@@ -240,7 +244,6 @@ export class St3dCardCarousel  {
         item.currentPlacement = degree;
         degree = degree + 60;
     });
-
   }
 
   componentDidLoad() {
@@ -264,7 +267,6 @@ export class St3dCardCarousel  {
 
   componentDidUpdate() {
     this.checkDistance();
-    this.checkAutoLoop();
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = [...this.slides];
       this.slides = [];
@@ -338,7 +340,7 @@ export class St3dCardCarousel  {
   }
 
   checkAutoLoop() {
-    if (this.autoloop.enabled && this.autoloopTask === null) {
+    if (this.autoloopTask === null && this.autoloop.enabled) {
       this.autoloopTask = setInterval(() => {
         if (this.autoloop.direction === 'left') {
           this.swipeLeftSlide();
@@ -348,7 +350,10 @@ export class St3dCardCarousel  {
         }
       }, this.autoloop.seconds); // Fires every 2 seconds by default. } }
     } else {
-      if (this.autoloopTask) clearInterval(this.autoloopTask);
+      if (this.autoloopTask) {
+        clearInterval(this.autoloopTask);
+        this.autoloopTask = null;
+      }
     }
   }
 
@@ -510,13 +515,9 @@ export class St3dCardCarousel  {
     if (this.start >= this.copySlides.length) {
       this.resetIndex();
     }
-    this.slides = [];
-    for (let i = this.start; i <= this.end; i++) {
-        this.slides = [
-          ...this.slides,
-          this.copySlides[i]
-        ];
-    }
+
+    this.slides = this.copySlides.slice(this.start, this.end + 1);
+
     this.updateIndex();
     return this.slides;
   }

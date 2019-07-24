@@ -8,7 +8,7 @@ import { CardItemsService } from '../../services/fake-card-items.service';
 })
 export class TestCarousel {
 
-  private items: any;
+  @State() items: any;
   @State() initialSlide: number = 3;
   @State() activeItem: number = 1;
   @State() slides: any;
@@ -65,9 +65,7 @@ export class TestCarousel {
   }
 
   handleClickAutoLoop() {
-    console.log('handleClickAutoLoop');
-    this.autoloop = {...this.autoloop, enabled: !this.autoloop.enabled};
-    console.log('autoloop', this.autoloop);
+    this.cycle();
   }
 
   currentItem(ev) {
@@ -185,7 +183,6 @@ export class TestCarousel {
       this.items.push(newSlides);
     }
 
-    this.slides = [...this.items];
     (cardCarouselElement as any).appendSlide(newSlides).then((slides) => {
       console.log("appendSlide::new slides: ", slides);
     });
@@ -231,10 +228,8 @@ export class TestCarousel {
       this.items.unshift(newSlides);
     }
 
-    this.slides = [...this.items];
-
     (cardCarouselElement as any).prependSlide(newSlides).then((slides) => {
-      console.log("prependSlide::new slides: " + slides);
+      console.log("prependSlide::new slides: ", slides);
     });
   }
 
@@ -278,10 +273,8 @@ export class TestCarousel {
       this.items.splice(2, 0, newSlides)
     }
 
-    this.slides = [...this.items];
-
     (cardCarouselElement as any).addSlide(2, newSlides).then((slides) => {
-      console.log("addSlide::new slides: " + slides);
+      console.log("addSlide::new slides: ", slides);
     });
   }
 
@@ -298,11 +291,8 @@ export class TestCarousel {
       this.items.splice(indexSlides, 1);
     }
 
-
-    this.slides = [...this.items];
-
     (cardCarouselElement as any).removeSlide(indexSlides).then((slides) => {
-      console.log("removeSlide::new slides: " + slides);
+      console.log("removeSlide::new slides: ", slides);
     });
 
   }
