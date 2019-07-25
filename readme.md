@@ -440,10 +440,29 @@ Navigates to the previous slide.
 ```
 
 
-
 #### Returns
 
 Type: `Promise<CardItem>`
+
+
+
+### `removeAllSlides() => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
+### `removeSlide(slideIndex: number | number[]) => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
 
 
 

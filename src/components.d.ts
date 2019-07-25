@@ -34,6 +34,7 @@ export namespace Components {
     'next': () => Promise<CardItem>;
     'prependSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'prev': () => Promise<CardItem>;
+    'removeAllSlides': () => Promise<CardItem[]>;
     'removeSlide': (slideIndex: number | number[]) => Promise<CardItem[]>;
     'select': (slideId: string | number) => Promise<CardItem>;
     'slideReset': () => Promise<CardItem>;

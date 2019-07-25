@@ -29,6 +29,7 @@ export class TestCarousel {
     next: true
   }
   @State() moreSlds = false;
+  @State() reloadSlds = false;
 
   @Element() htmlEl: HTMLElement;
 
@@ -307,6 +308,24 @@ export class TestCarousel {
 
   }
 
+  removeAllSlides() {
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    this.items = [];
+    this.initialSlide = 0;
+    this.activeItem = 0;
+    (cardCarouselElement as any).removeAllSlides().then((slides) => {
+      console.log("removeAllSlides::slides: ", slides);
+      // this.slides = [...CardItemsService.getAll()];
+      this.reloadSlds = true;
+    });
+  }
+
+  reloadSlides() {
+    this.items = [...CardItemsService.getAll()];
+    this.slides = [...CardItemsService.getAll()];
+    this.reloadSlds = false;
+  }
+
   reachEndSlides(ev) {
     console.log(ev.detail);
   }
@@ -352,6 +371,13 @@ export class TestCarousel {
         <br></br>
         <button class={buttonClass} onClick={this.addSlide.bind(this)}>Add slides at index 2</button>
         <button class={buttonClass} onClick={() => this.removeSlide([0, 4, 5])}>Remove slides at index [0, 4, 5]</button>
+        <br></br>
+        <br></br>
+        <button class={buttonClass} onClick={() => this.removeAllSlides()}>Remove all slides</button>
+        { this.reloadSlds
+          ? <button class={buttonClass} onClick={() => this.reloadSlides()}>Reload slides</button>
+          : null
+        }
       </div>
     );
   }

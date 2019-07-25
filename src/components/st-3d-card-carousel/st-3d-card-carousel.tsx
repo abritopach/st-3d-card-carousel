@@ -219,6 +219,15 @@ export class St3dCardCarousel  {
   }
 
   @Method()
+  async removeAllSlides(): Promise<CardItem[]> {
+    this.resetIndex();
+    this.copySlides = [];
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
+    this.items = [...this.slides];
+    return this.copySlides;
+  }
+
+  @Method()
   async loadMore(): Promise<CardItem[]> {
     return this.getCurrentSlides();
   }
