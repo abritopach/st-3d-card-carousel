@@ -176,6 +176,16 @@ Type: `Promise<CardItem>`
 
 
 
+### `reloadSlides() => Promise<CardItem[]>`
+
+
+
+#### Returns
+
+Type: `Promise<CardItem[]>`
+
+
+
 ### `removeAllSlides() => Promise<CardItem[]>`
 
 

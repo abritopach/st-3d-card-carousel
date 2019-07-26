@@ -324,6 +324,11 @@ export class TestCarousel {
     this.items = [...CardItemsService.getAll()];
     this.slides = [...CardItemsService.getAll()];
     this.reloadSlds = false;
+
+    const cardCarouselElement = document.querySelector('st-3D-card-carousel');
+    (cardCarouselElement as any).reloadSlides().then((slides) => {
+      console.log("reloadSlides::slides: ", slides);
+    });
   }
 
   reachEndSlides(ev) {

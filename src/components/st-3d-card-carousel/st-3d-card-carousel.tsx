@@ -237,6 +237,24 @@ export class St3dCardCarousel  {
     return this.copySlides.length > this.slidesToShow  ? true : false;
   }
 
+  @Method()
+  async reloadSlides(): Promise<CardItem[]> {
+    this.resetIndex();
+    if (this.slides.length === 0) {
+      this.items = [...this.items, ...CardItemsService.getAll()];
+      this.copySlides = [...this.items];
+    }
+    else {
+      this.copySlides = [...this.slides];
+      this.items = [...this.getCurrentSlides()];
+    }
+    this.slides = [...this.copySlides.slice(0, this.slidesToShow)];
+
+    this.updateIndex();
+
+    return this.copySlides;
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 
