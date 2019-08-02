@@ -602,9 +602,11 @@ import { HomePage } from './home.page'
   declarations: [HomePage],
 })
 export class HomePageModule {}
+```
 
 4) Use 3D card carousel web component in html
 
+```bash
 <st-3D-card-carousel [slides]="slides" [autoloop]="autoloop" [distance]="slideDistance" (selectedItem)="handleSelectedItem($event)"
   (slideChange)="handleSlideChange($event)"></st-3D-card-carousel>
 ```
@@ -641,13 +643,14 @@ applyPolyfills().then(() => {
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+```
 
 3) Use 3D card carousel web component in jsx
 
 Vue provides a way to explicitly pass the object as a property rather than an attribute, it is as simple as adding .prop to the property name of the stencil component.
 
+```bash
 <st-3D-card-carousel v-bind:slides.prop="slides" v-bind:autoloop.prop="autoloop"></st-3D-card-carousel>
-
 ```
 
 ### Example Ionic project
