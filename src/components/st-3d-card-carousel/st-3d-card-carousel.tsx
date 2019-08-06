@@ -105,7 +105,10 @@ export class St3dCardCarousel  {
   @Method()
   async select(slideId: number | string): Promise<CardItem> {
     this.selectSlide(slideId);
-    return this.slides[slideId];
+    if (typeof slideId === "string") {
+      slideId = this.getSlideIndex(slideId);
+    }
+    return slideId <= this.items.length ? this.slides[slideId] : null;
   }
 
   @Method()
@@ -480,7 +483,8 @@ export class St3dCardCarousel  {
       slideId = this.getSlideIndex(slideId);
     }
 
-    if (this.currentSlide !== slideId) {
+    console.log(this.items.length);
+    if ((this.currentSlide !== slideId) && (slideId <= this.items.length)) {
       let index = slideId - 1;
       if (slideId === 0) index = 0;
       this.currentDeg = - this.items[index].currentPlacement;
@@ -488,6 +492,9 @@ export class St3dCardCarousel  {
       this.currentSlide = slideId;
       this.currentItem.emit(this.currentSlide);
       this.isFirstOrLastSlide();
+    }
+    else {
+      console.log('St3dCardCarousel::selectSlide() | Error: slides legth is less than slideId');
     }
   }
 
