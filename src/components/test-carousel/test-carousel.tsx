@@ -30,6 +30,7 @@ export class TestCarousel {
   }
   @State() moreSlds = false;
   @State() reloadSlds = false;
+  @State() axis = 'vertical';
 
   @Element() htmlEl: HTMLElement;
 
@@ -347,7 +348,8 @@ export class TestCarousel {
         <p>Initial slide: {this.initialSlide} </p>
         <p>Current slide: {this.activeItem} </p>
         <p>Slides length: {this.items.length} </p>
-        <st-3D-card-carousel slides={this.slides} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
+        <p><b>Horizontal mode</b></p>
+        <st-3D-card-carousel slides={this.slides} axis={this.axis} autoloop={this.autoloop} initialSlide={this.initialSlide} slidesToShow={this.slidesToShow}
         slideStyle={this.slideStyle} animationSelectedSlide={this.animationSelectedSlide} keyboard={this.keyboard} distance={this.distance}
         allowSwipeSlide={this.allowSwipeSlide} onCurrentItem={ev => this.currentItem(ev)} onSlideChange={ev => this.slideChange(ev)}
         onReachEndSlides={ev => this.reachEndSlides(ev)} onReachBeginningSlides={ev => this.reachBeginningSlides(ev)}></st-3D-card-carousel>

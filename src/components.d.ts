@@ -67,7 +67,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface St3dCardCarousel extends JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement> {
+  interface St3dCardCarousel {
     'allowSwipeSlide'?: { prev: boolean; next: boolean; };
     'animationSelectedSlide'?: boolean;
     'autoloop'?: { enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; };
@@ -86,7 +86,7 @@ declare namespace LocalJSX {
     'slides'?: CardItem[];
     'slidesToShow'?: number;
   }
-  interface TestCarousel extends JSXBase.HTMLAttributes<HTMLTestCarouselElement> {}
+  interface TestCarousel {}
 
   interface IntrinsicElements {
     'st-3d-card-carousel': St3dCardCarousel;
@@ -99,7 +99,10 @@ export { LocalJSX as JSX };
 
 declare module "@stencil/core" {
   export namespace JSX {
-    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+    interface IntrinsicElements {
+      'st-3d-card-carousel': LocalJSX.St3dCardCarousel & JSXBase.HTMLAttributes<HTMLSt3dCardCarouselElement>;
+      'test-carousel': LocalJSX.TestCarousel & JSXBase.HTMLAttributes<HTMLTestCarouselElement>;
+    }
   }
 }
 

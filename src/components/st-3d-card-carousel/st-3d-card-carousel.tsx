@@ -566,6 +566,29 @@ export class St3dCardCarousel  {
     return this.slides;
   }
 
+  showCarousel(items) {
+    console.log(items);
+    if (this.axis === 'horizontal') {
+      return (
+        <div class="carousel-container">
+          <div id="carousel" class="carousel">
+              {items}
+          </div>
+        </div>
+      );
+    }
+    if (this.axis === 'vertical') {
+      return (
+        <div class="carousel-container">
+          <div id="carousel" class="carousel">
+              {items}
+          </div>
+        </div>
+      );
+    }
+    
+  }
+
   render() {
     const items = this.items.map((item, index) => {
         let divStyle = {
@@ -613,11 +636,8 @@ export class St3dCardCarousel  {
         [
         this.showControls('top')
         ,
-        <div class="carousel-container">
-            <div id="carousel" class="carousel">
-                {items}
-            </div>
-        </div>,
+        this.showCarousel(items)
+        ,
         this.showControls('bottom')
         ]
     )
