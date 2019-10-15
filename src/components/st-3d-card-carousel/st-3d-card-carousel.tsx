@@ -415,13 +415,21 @@ export class St3dCardCarousel  {
     */
     mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-    mc.on("swipeleft swiperight", (ev => {
-      if (ev.type == "swipeleft") {
+    mc.on("swipeleft swiperight swipeup swipedown", (ev => {
+      console.log(ev);
+      if (ev.type === "swipeleft") {
         this.swipeLeftSlide();
       }
-      if (ev.type == "swiperight") {
+      if (ev.type === "swiperight") {
         this.swipeRightSlide();
       }
+      if (ev.type === "swipeup") {
+        console.log('swipeup');
+      }
+      if (ev.type === "swipedown") {
+        console.log('swipedown');
+      }
+      
     }).bind(this));
   }
 
@@ -579,8 +587,8 @@ export class St3dCardCarousel  {
     }
     if (this.axis === 'vertical') {
       return (
-        <div class="carousel-container">
-          <div id="carousel" class="carousel">
+        <div class="carousel-container-vertical">
+          <div id="carousel" class="carousel-vertical">
               {items}
           </div>
         </div>
@@ -600,6 +608,14 @@ export class St3dCardCarousel  {
           color: 'white'
         };
         let myClass = 'carousel-slide-item slide-item' + item.id;
+        if (this.axis === 'vertical') {
+          myClass = 'carousel-slide-item-vertical slide-item' + item.id;
+          divStyle = {
+            'background-color': item.color,
+            'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
+            '-webkit-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
+          };
+        }
         if (this.slideStyle) divStyle = {...divStyle, ...this.slideStyle}
         return (
           <div class={myClass} style={divStyle} onClick={ () => this.onHandleClick(this.items[index])} onDblClick={ () => this.onHandleDoubleClick(this.items[index])}>

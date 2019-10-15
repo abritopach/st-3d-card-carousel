@@ -30,7 +30,7 @@ export class TestCarousel {
   }
   @State() moreSlds = false;
   @State() reloadSlds = false;
-  @State() axis = 'vertical';
+  @State() axis = 'horizontal';
 
   @Element() htmlEl: HTMLElement;
 

@@ -30,6 +30,8 @@ i {
     }
 }
 
+/* HORIZONTAL CAROUSEL CSS. DEFAULT CAROUSEL. */
+
 .carousel-container {
     padding: 70px 0;
     margin: 50px auto;
@@ -194,4 +196,54 @@ i {
 
 .controls-bottom {
     margin-top: -50px;
+}
+
+/* VERTICAL CAROUSEL CSS. */
+
+.carousel-container-vertical {
+    padding: 70px 0;
+    margin: 50px auto;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+    touch-action: pan-y;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+.carousel-vertical {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+.carousel-vertical img {
+    width:100px;
+    height:100px;
+    margin: 10px 0 0 10px;
+    float: left;
+    border-radius: 50%;
+}
+
+.carousel-slide-item-vertical {
+    display: block;
+    position: absolute;
+    background:#000;
+    width: 400px;
+    height: 200px;
+    font-size: large;
+    text-align: center;
+    color: #FFF;
+    opacity: 0.95;
+    border-radius: 10px;
+}
+
+.carousel-slide-item-vertical div {
+    width: 200px;
+    height: 20px;
+    margin: auto;
 }
