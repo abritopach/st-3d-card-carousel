@@ -290,7 +290,9 @@ export class St3dCardCarousel  {
 
     // let carousel = this.htmlEl.querySelector('.carousel');
     // let carousel = document.getElementById('carousel');
-    let carousel = this.htmlEl.shadowRoot.querySelector('.carousel') as HTMLElement;
+    const carouselClass = this.axis === 'horizontal' ? '.carousel' : '.carousel-vertical';
+    let carousel = this.htmlEl.shadowRoot.querySelector(carouselClass) as HTMLElement;
+    console.log(carousel);
 
     if ((typeof carousel !== 'undefined') && (carousel !== null)) {
       this.listenSwipeHammerEvent(carousel);
@@ -340,11 +342,21 @@ export class St3dCardCarousel  {
 
   applyStyle() {
     // let ele = this.htmlEl.querySelector('.carousel');
-    let ele = this.htmlEl.shadowRoot.querySelector('.carousel');
-    ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
-    ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
-    ele.setAttribute("style", "-o-transform: rotateY(" + this.currentDeg + "deg)");
-    ele.setAttribute("style", "transform: rotateY(" + this.currentDeg + "deg)");
+    const carouselClass = this.axis === 'horizontal' ? '.carousel' : '.carousel-vertical';
+    let ele = this.htmlEl.shadowRoot.querySelector(carouselClass);
+    console.log('applyStyle ele', ele);
+    if (this.axis === 'horizontal') {
+      ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "-o-transform: rotateY(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "transform: rotateY(" + this.currentDeg + "deg)");
+    }
+    else {
+      ele.setAttribute("style", "-webkit-transform: rotateX(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "-moz-transform: rotateX(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "-o-transform: rotateX(" + this.currentDeg + "deg)");
+      ele.setAttribute("style", "transform: rotateX(" + this.currentDeg + "deg)");
+    }
   }
 
   applyResizeStyle(item: CardItem) {
@@ -404,7 +416,7 @@ export class St3dCardCarousel  {
 
   listenSwipeHammerEvent(carousel) {
     let mc = new Hammer(carousel);
-
+    
     /*
     let mc = new Hammer.Manager(carousel, {
       recognizers: [
