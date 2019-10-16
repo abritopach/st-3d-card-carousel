@@ -258,6 +258,12 @@ export class St3dCardCarousel  {
     return this.copySlides;
   }
 
+  @Method()
+  async changeMode(): Promise<string> {
+    this.axis = this.axis === 'vertical' ? 'horizontal' : 'vertical';
+    return this.axis;
+  }
+
   componentWillLoad() {
     console.log('St3dCardCarousel::componentWillLoad() | method called');
 
@@ -300,10 +306,11 @@ export class St3dCardCarousel  {
   }
 
   componentWillUpdate() {
-    // console.log('St3dCardCarousel::componentWillUpdate() | method called');
+    console.log('St3dCardCarousel::componentWillUpdate() | method called');
   }
 
   componentDidUpdate() {
+    console.log('St3dCardCarousel::componentDidUpdate() | method called', this.slides);
     this.checkDistance();
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = [...this.slides];
@@ -436,10 +443,10 @@ export class St3dCardCarousel  {
         this.swipeRightSlide();
       }
       if (ev.type === "swipeup") {
-        console.log('swipeup');
+        this.swipeRightSlide();
       }
       if (ev.type === "swipedown") {
-        console.log('swipedown');
+        this.swipeLeftSlide();
       }
       
     }).bind(this));
@@ -587,7 +594,6 @@ export class St3dCardCarousel  {
   }
 
   showCarousel(items) {
-    console.log(items);
     if (this.axis === 'horizontal') {
       return (
         <div class="carousel-container">

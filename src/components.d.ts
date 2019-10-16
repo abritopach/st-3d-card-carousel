@@ -18,6 +18,7 @@ export namespace Components {
     'appendSlide': (slides: CardItem | CardItem[]) => Promise<CardItem[]>;
     'autoloop': { enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; };
     'axis': string;
+    'changeMode': () => Promise<string>;
     'controls': { enabled: boolean; position: string; text: string[]; };
     'cycle': () => Promise<boolean>;
     'distance': number;
