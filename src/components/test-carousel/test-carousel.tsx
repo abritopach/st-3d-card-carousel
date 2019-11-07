@@ -344,6 +344,7 @@ export class TestCarousel {
     const cardCarouselElement = document.querySelector('st-3D-card-carousel');
     (cardCarouselElement as any).changeMode().then((newMode) => {
       console.log('newMode', newMode);
+      this.axis = newMode;
     });
   }
 

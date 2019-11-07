@@ -261,6 +261,7 @@ export class St3dCardCarousel  {
   @Method()
   async changeMode(): Promise<string> {
     this.axis = this.axis === 'vertical' ? 'horizontal' : 'vertical';
+    this.resetStyle();
     return this.axis;
   }
 
@@ -298,7 +299,6 @@ export class St3dCardCarousel  {
     // let carousel = document.getElementById('carousel');
     const carouselClass = this.axis === 'horizontal' ? '.carousel' : '.carousel-vertical';
     let carousel = this.htmlEl.shadowRoot.querySelector(carouselClass) as HTMLElement;
-    console.log(carousel);
 
     if ((typeof carousel !== 'undefined') && (carousel !== null)) {
       this.listenSwipeHammerEvent(carousel);
@@ -351,7 +351,7 @@ export class St3dCardCarousel  {
     // let ele = this.htmlEl.querySelector('.carousel');
     const carouselClass = this.axis === 'horizontal' ? '.carousel' : '.carousel-vertical';
     let ele = this.htmlEl.shadowRoot.querySelector(carouselClass);
-    console.log('applyStyle ele', ele);
+    // console.log('applyStyle ele', ele);
     if (this.axis === 'horizontal') {
       ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
       ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
@@ -364,6 +364,12 @@ export class St3dCardCarousel  {
       ele.setAttribute("style", "-o-transform: rotateX(" + this.currentDeg + "deg)");
       ele.setAttribute("style", "transform: rotateX(" + this.currentDeg + "deg)");
     }
+  }
+
+  resetStyle() {
+    const carouselClass = this.axis !== 'horizontal' ? '.carousel' : '.carousel-vertical';
+    let ele = this.htmlEl.shadowRoot.querySelector(carouselClass);
+    ele.removeAttribute("style");
   }
 
   applyResizeStyle(item: CardItem) {
@@ -423,7 +429,6 @@ export class St3dCardCarousel  {
 
   listenSwipeHammerEvent(carousel) {
     let mc = new Hammer(carousel);
-    
     /*
     let mc = new Hammer.Manager(carousel, {
       recognizers: [
@@ -435,7 +440,6 @@ export class St3dCardCarousel  {
     mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
     mc.on("swipeleft swiperight swipeup swipedown", (ev => {
-      console.log(ev);
       if (ev.type === "swipeleft") {
         this.swipeLeftSlide();
       }
@@ -443,13 +447,20 @@ export class St3dCardCarousel  {
         this.swipeRightSlide();
       }
       if (ev.type === "swipeup") {
-        this.swipeRightSlide();
+        this.swipeUpSlide();
       }
       if (ev.type === "swipedown") {
-        this.swipeLeftSlide();
+        this.swipeDownSlide();
       }
-      
     }).bind(this));
+  }
+
+  swipeUpSlide() {
+    this.swipeRightSlide();
+  }
+
+  swipeDownSlide() {
+    this.swipeLeftSlide();
   }
 
   swipeLeftSlide() {
@@ -510,7 +521,6 @@ export class St3dCardCarousel  {
       slideId = this.getSlideIndex(slideId);
     }
 
-    console.log(this.items.length);
     if ((this.currentSlide !== slideId) && (slideId <= this.items.length)) {
       let index = slideId - 1;
       if (slideId === 0) index = 0;
@@ -612,14 +622,13 @@ export class St3dCardCarousel  {
         </div>
       );
     }
-    
   }
 
   render() {
     const items = this.items.map((item, index) => {
         let divStyle = {
           'background-color': item.color,
-          'transform': 'rotateY(-'+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
+          'transform': 'rotateY('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
           '-webkit-transform': 'rotateY('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
         };
         let iconStyles = {
@@ -630,7 +639,7 @@ export class St3dCardCarousel  {
           myClass = 'carousel-slide-item-vertical slide-item' + item.id;
           divStyle = {
             'background-color': item.color,
-            'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
+            'transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
             '-webkit-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+this.tz+'px)',
           };
         }
