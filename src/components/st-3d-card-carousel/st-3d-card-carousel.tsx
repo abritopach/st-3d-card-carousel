@@ -4,6 +4,8 @@ import 'hammerjs';
 
 import { CardItemsService } from '../../services/fake-card-items.service';
 
+import { Log } from '../../log/log';
+
 @Component({
   tag: 'st-3d-card-carousel',
   styleUrl: 'st-3d-card-carousel.css',
@@ -11,6 +13,7 @@ import { CardItemsService } from '../../services/fake-card-items.service';
 })
 export class St3dCardCarousel  {
 
+  private carouselLogger = new Log();
   private start: number = 0;
   private end: number = 5;
   private items: CardItem[] = [];
@@ -266,7 +269,8 @@ export class St3dCardCarousel  {
   }
 
   componentWillLoad() {
-    console.log('St3dCardCarousel::componentWillLoad() | method called');
+    this.carouselLogger.log('St3dCardCarousel::componentWillLoad() | method called');
+    // console.log('St3dCardCarousel::componentWillLoad() | method called');
 
     if (this.slides.length === 0) {
       this.items = [...this.items, ...CardItemsService.getAll()];
@@ -290,7 +294,8 @@ export class St3dCardCarousel  {
   }
 
   componentDidLoad() {
-    console.log('St3dCardCarousel::componentDidLoad() | method called');
+    this.carouselLogger.log('St3dCardCarousel::componentDidLoad() | method called');
+    //console.log('St3dCardCarousel::componentDidLoad() | method called');
 
     this.checkAutoLoop();
     this.checkInitialSlide();
