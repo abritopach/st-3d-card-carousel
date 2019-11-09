@@ -29,10 +29,10 @@ export class Log implements ILog {
     }
 
     private emitLogMessage(msgType: "log" | "debug" | "warn" | "error" | "info", msg: string, suportingDetails: any[]) {
-        // if (this.logEnabled) {
+        if (this.logEnabled) {
             suportingDetails.length > 0 ? console[msgType](msg, suportingDetails)
             : console[msgType](msg);
-        // }
+        }
     }
 
 }

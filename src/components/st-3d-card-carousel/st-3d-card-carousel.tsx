@@ -55,7 +55,8 @@ export class St3dCardCarousel  {
   @Prop() allowSwipeSlide = {
     prev: true,
     next: true
-  }
+  };
+  @Prop() debug: boolean = false;
   @Event() selectedItem: EventEmitter;
   @Event() currentItem: EventEmitter;
   @Event() slideChange: EventEmitter;
@@ -84,6 +85,13 @@ export class St3dCardCarousel  {
         this.swipeRightSlide();
       }
     }
+  }
+
+  @Method()
+  async enableDebug(): Promise<boolean> {
+    this.debug = true;
+    this.carouselLogger.logEnabled = this.debug;
+    return this.debug;
   }
 
   @Method()
@@ -269,8 +277,8 @@ export class St3dCardCarousel  {
   }
 
   componentWillLoad() {
+    if (this.debug) this.carouselLogger.logEnabled = true;
     this.carouselLogger.log('St3dCardCarousel::componentWillLoad() | method called');
-    // console.log('St3dCardCarousel::componentWillLoad() | method called');
 
     if (this.slides.length === 0) {
       this.items = [...this.items, ...CardItemsService.getAll()];
@@ -295,7 +303,6 @@ export class St3dCardCarousel  {
 
   componentDidLoad() {
     this.carouselLogger.log('St3dCardCarousel::componentDidLoad() | method called');
-    //console.log('St3dCardCarousel::componentDidLoad() | method called');
 
     this.checkAutoLoop();
     this.checkInitialSlide();
@@ -311,11 +318,11 @@ export class St3dCardCarousel  {
   }
 
   componentWillUpdate() {
-    console.log('St3dCardCarousel::componentWillUpdate() | method called');
+    this.carouselLogger.log('St3dCardCarousel::componentWillUpdate() | method called');
   }
 
   componentDidUpdate() {
-    console.log('St3dCardCarousel::componentDidUpdate() | method called', this.slides);
+    this.carouselLogger.log('St3dCardCarousel::componentDidUpdate() | method called', {slides: this.slides});
     this.checkDistance();
     if ((this.slides != null) && (this.slides.length != 0)) {
       this.items = [...this.slides];
@@ -332,7 +339,7 @@ export class St3dCardCarousel  {
   onHandleClick(item: CardItem) {
     this.timer = setTimeout(() => {
       if (!this.prevent) {
-        console.log('St3dCardCarousel::onHandleClick() | method called', item);
+        this.carouselLogger.log('St3dCardCarousel::onHandleClick() | method called', {item: item});
         this.selectedItem.emit(item);
         if (this.animationSelectedSlide) {
           this.applyResizeStyle(item);
@@ -346,7 +353,7 @@ export class St3dCardCarousel  {
   }
 
   onHandleDoubleClick(item: CardItem) {
-    console.log('St3dCardCarousel::onHandleDoubleClick() | method called', item);
+    this.carouselLogger.log('St3dCardCarousel::onHandleDoubleClick() | method called', {item: item});
     clearTimeout(this.timer);
     this.prevent = true;
     this.slideDoubleTap.emit(item);
@@ -356,7 +363,6 @@ export class St3dCardCarousel  {
     // let ele = this.htmlEl.querySelector('.carousel');
     const carouselClass = this.axis === 'horizontal' ? '.carousel' : '.carousel-vertical';
     let ele = this.htmlEl.shadowRoot.querySelector(carouselClass);
-    // console.log('applyStyle ele', ele);
     if (this.axis === 'horizontal') {
       ele.setAttribute("style", "-webkit-transform: rotateY(" + this.currentDeg + "deg)");
       ele.setAttribute("style", "-moz-transform: rotateY(" + this.currentDeg + "deg)");
@@ -378,24 +384,12 @@ export class St3dCardCarousel  {
   }
 
   applyResizeStyle(item: CardItem) {
-    // console.log('St3dCardCarousel::applyResizeStyle(item) | method called', item);
-    // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
     let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
-    /*
-    console.log('applyResizeStyle ele', ele);
-    ele.setAttribute('style', 'background-color: rgb(231, 76, 60); transform: rotateY(0) translateZ(250px);');
-    */
     ele.classList.add("slide-item-animation");
   }
 
   resetResizeStyle(item: CardItem) {
-    // console.log('St3dCardCarousel::resetResizeStyle(item) | method called', item);
-    // let ele = this.htmlEl.querySelector('.slide-item' + item.id);
     let ele = this.htmlEl.shadowRoot.querySelector('.slide-item' + item.id);
-    /*
-    ele.setAttribute('style', 'background-color: rgb(231, 76, 60); transform: rotateY(120deg) translateZ(250px);');
-    console.log('resetResizeStyle ele', ele);
-    */
     ele.classList.remove("slide-item-animation");
   }
 
@@ -428,7 +422,7 @@ export class St3dCardCarousel  {
       this.selectSlide(this.initialSlide);
     }
     if (this.initialSlide > this.slidesToShow) {
-      console.log('St3dCardCarousel ERROR: Initial slide is greater than the number of slides to show.')
+      this.carouselLogger.error('St3dCardCarousel ERROR: Initial slide is greater than the number of slides to show.');
     }
   }
 
@@ -536,17 +530,17 @@ export class St3dCardCarousel  {
       this.isFirstOrLastSlide();
     }
     else {
-      console.log('St3dCardCarousel::selectSlide() | Error: slides legth is less than slideId');
+      this.carouselLogger.error('St3dCardCarousel::selectSlide() | Error: slides legth is less than slideId');
     }
   }
 
   onHandleClickArrowLeft() {
-    console.log('St3dCardCarousel::onHandleClickArrowLeft() | method called');
+    this.carouselLogger.log('St3dCardCarousel::onHandleClickArrowLeft() | method called');
     this.swipeLeftSlide();
   }
 
   onHandleClickArrowRight() {
-    console.log('St3dCardCarousel::onHandleClickArrowRight() | method called');
+    this.carouselLogger.log('St3dCardCarousel::onHandleClickArrowRight() | method called');
     this.swipeRightSlide();
   }
 

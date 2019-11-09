@@ -22,7 +22,9 @@ export namespace Components {
     'changeMode': () => Promise<string>;
     'controls': { enabled: boolean; position: string; text: string[]; };
     'cycle': () => Promise<boolean>;
+    'debug': boolean;
     'distance': number;
+    'enableDebug': () => Promise<boolean>;
     'getActiveIndex': () => Promise<number>;
     'getNextIndex': () => Promise<number>;
     'getPreviousIndex': () => Promise<number>;
@@ -75,6 +77,7 @@ declare namespace LocalJSX {
     'autoloop'?: { enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; };
     'axis'?: string;
     'controls'?: { enabled: boolean; position: string; text: string[]; };
+    'debug'?: boolean;
     'distance'?: number;
     'initialSlide'?: number;
     'keyboard'?: boolean;
