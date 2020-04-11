@@ -4,8 +4,7 @@ export const config: Config = {
   namespace: 'st-3d-card-carousel',
   outputTargets: [
     {
-      type: 'dist',
-      esmLoaderPath: '../loader'
+      type: 'dist'
     },
     {
       type: 'docs-readme'

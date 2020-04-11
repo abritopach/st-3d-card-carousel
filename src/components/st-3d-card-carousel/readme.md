@@ -14,6 +14,7 @@
 | `autoloop`               | --                         |             | `{ enabled: boolean; seconds: number; direction: string; stopOnLastSlide: boolean; }` | `{     enabled: false,     seconds: 2000,     direction: 'right',     stopOnLastSlide: false   }` |
 | `axis`                   | `axis`                     |             | `string`                                                                              | `'horizontal'`                                                                                    |
 | `controls`               | --                         |             | `{ enabled: boolean; position: string; text: string[]; }`                             | `{     enabled: false,     position: 'top',     text: ['prev', 'next']   }`                       |
+| `debug`                  | `debug`                    |             | `boolean`                                                                             | `false`                                                                                           |
 | `distance`               | `distance`                 |             | `number`                                                                              | `undefined`                                                                                       |
 | `initialSlide`           | `initial-slide`            |             | `number`                                                                              | `1`                                                                                               |
 | `keyboard`               | `keyboard`                 |             | `boolean`                                                                             | `false`                                                                                           |
@@ -56,7 +57,27 @@ Type: `Promise<CardItem[]>`
 
 
 
+### `changeMode() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 ### `cycle() => Promise<boolean>`
+
+
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
+
+### `enableDebug() => Promise<boolean>`
 
 
 
